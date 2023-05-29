@@ -1,47 +1,12 @@
-import 'package:askida_afet/shopping_cart_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:askida_afet/drawer_menu.dart';
-import 'package:askida_afet/search_delegate.dart';
+import 'package:askida_afet/ihtiyac_listesi.dart';
 
-class IhtiyacListesi extends StatefulWidget {
-  @override
-  _IhtiyacListesiState createState() => _IhtiyacListesiState();
-
-}
-
-class _IhtiyacListesiState extends State<IhtiyacListesi> {
-  int _currentIndex = 0;
-  GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
-  String searchText = '';
-
-  @override
-  void initState() {
-    super.initState();
-    searchText = '';
-  }
-
-  void addToCart(String item) {
-    selectedItems.add(item);
-  }
-
+class ShoppingCartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      key: _scaffold,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu, // Menü ikonu
-            color: Color(0xFF3B3B3B),
-            size: 30,
-          ),
-          onPressed: () {
-            _scaffold.currentState?.openDrawer();
-          },
-          tooltip: 'Menüyü Aç',
-        ),
         centerTitle: true,
         title: Text(
           'ASKIDA AFET',
@@ -51,43 +16,23 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
             fontSize: 21,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.shopping_cart_outlined, // Sağdaki ilk ikon
-              color: Color(0xFF3B3B3B),
-              size: 30,
-            ),
-            onPressed: () {
-              // İkon tıklama işlemleri
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ShoppingCartScreen()),
-              );
-            },
-            tooltip: 'Sepete Git'
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Color(0xFF3B3B3B), // Geri butonunun rengi
           ),
-          IconButton(
-            icon: Icon(
-              Icons.search, // Sağdaki ikinci ikon
-              color: Color(0xFF3B3B3B),
-              size: 30,
-            ),
-            onPressed: () {
-              // İkon tıklama işlemleri
-              showSearch(context: context, delegate: Search_Delegate(IhtiyacListesi()));
-            },
-            tooltip: 'Arama Yap'
-          ),
-        ],
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-      body: Column(
+      body:Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Text(
-              'İhtiyaç Listesi',
+              'Sepet',
               style: TextStyle(
                 fontSize: 19,
                 fontWeight: FontWeight.bold,
@@ -103,9 +48,9 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
               color: Color(0xFFF4F4F4),
               padding: EdgeInsets.all(16),
               child: ListView.builder(
-                itemCount: itemList.length,
+                itemCount: selectedItems.length,
                 itemBuilder: (context, index) {
-                  final item = itemList[index];
+                  final item = selectedItems[index];
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -127,10 +72,9 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
                         IconButton(
                           onPressed: () {
                             // İkon tıklama işlemleri
-                            addToCart(item);
                           },
                           icon: Icon(
-                            Icons.add_circle,
+                            Icons.delete_outline_outlined,
                             color: Color(0xFFCF0000),
                             size: 35,
                           ),
@@ -160,12 +104,6 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -185,24 +123,16 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
           ),
         ],
       ),
-      drawer: DrawerMenu(),
+
+
+
+
+
+
+
+
+
     );
   }
 
-
 }
-List<String> itemList = [
-  'Elektrikli Isıtıcı',
-  'Büyük-Küçük Tüp',
-  'Odun, Kömür Sobası-Odun',
-  'Cep Isıtıcısı',
-  'Çocuk ve Erişkin Mont',
-  'Powerbank',
-  'Kadın-Erkek İç Giyim ve Çorap',
-  'Kadın-Erkek Ayakkabı',
-  'Uyku Tulumu-Yastık',
-  'Yatak ve Nevresim Takımı',
-  'Su-Ekmek-Hazır Gıda',
-];
-
-List<String> selectedItems = [];

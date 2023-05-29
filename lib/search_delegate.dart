@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
+import 'package:askida_afet/shopping_cart_screen.dart';
 
 class Search_Delegate extends SearchDelegate<String> {
+  IhtiyacListesi ihtiyacListesi; // IhtiyacListesi sınıfına referans
+  Search_Delegate(this.ihtiyacListesi); // Constructor
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -17,7 +21,7 @@ class Search_Delegate extends SearchDelegate<String> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: Icon(Icons.arrow_back_ios_new_outlined),
       onPressed: () {
         close(context, '');
       },
@@ -39,7 +43,13 @@ class Search_Delegate extends SearchDelegate<String> {
           title: Text(result),
           onTap: () {
             // Sonuç seçildiğinde yapılacak işlemler
-            close(context, result);
+            selectedItems.add(result);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ShoppingCartScreen(), // Sepet ekranını aç
+              ),
+            );
           },
         );
       },
