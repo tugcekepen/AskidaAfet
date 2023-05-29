@@ -9,10 +9,11 @@ class IhtiyacListesi extends StatefulWidget {
 class _HomePageState extends State<IhtiyacListesi> {
   int _currentIndex = 0;
   bool _isMenuOpen = false;
-
+  GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffold,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
@@ -22,10 +23,9 @@ class _HomePageState extends State<IhtiyacListesi> {
             size: 30,
           ),
           onPressed: () {
-            setState(() {
-              _isMenuOpen = !_isMenuOpen;
-            });
+            _scaffold.currentState?.openDrawer();
           },
+          tooltip: 'Menüyü Aç',
         ),
         centerTitle: true,
         title: Text(
@@ -46,6 +46,7 @@ class _HomePageState extends State<IhtiyacListesi> {
             onPressed: () {
               // İkon tıklama işlemleri
             },
+            tooltip: 'Sepete Git'
           ),
           IconButton(
             icon: Icon(
@@ -56,6 +57,7 @@ class _HomePageState extends State<IhtiyacListesi> {
             onPressed: () {
               // İkon tıklama işlemleri
             },
+            tooltip: 'Arama Yap'
           ),
         ],
       ),
