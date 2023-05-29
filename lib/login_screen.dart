@@ -5,22 +5,22 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/login_screen.jpg'),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'assets/images/login_screen.jpg',
             fit: BoxFit.cover,
           ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 100),
+                child: Column(
+                  children: [
+                    ElevatedButton(
                       onPressed: () {
                         // "İhtiyaç Sahibiyim" butonuna tıklandığında yapılacak işlemler
                         Navigator.push(
@@ -31,44 +31,54 @@ class LoginScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFC85353),
+                        backgroundColor: Color(0xFFC85353),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.0),
                         ),
+                        fixedSize: Size(152, 47)
                       ),
-                      child: Text(
-                        'İhtiyaç Sahibiyim',
-                        style: TextStyle(
-                          color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        child: Text(
+                          'İhtiyaç Sahibiyim',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: ElevatedButton(
+                    SizedBox(height: 10),
+                    ElevatedButton(
                       onPressed: () {
                         // "Bağışçıyım" butonuna tıklandığında yapılacak işlemler
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFC85353),
+                        backgroundColor: Color(0xFFC85353),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.0),
                         ),
+                        fixedSize: Size(152, 47)
                       ),
-                      child: Text(
-                        'Bağışçıyım',
-                        style: TextStyle(
-                          color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        child: Text(
+                          'Bağışçıyım',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
