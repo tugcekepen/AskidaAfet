@@ -1,4 +1,7 @@
+import 'package:askida_afet/contact_screen.dart';
+import 'package:askida_afet/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:askida_afet/about_us_screen.dart';
 
 class DrawerMenu extends StatelessWidget {
   @override
@@ -21,6 +24,10 @@ class DrawerMenu extends StatelessWidget {
             onTap: () {
               // Hakkımızda seçeneğine tıklama işlemleri
               Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutUsScreen()),
+              );
             },
           ),
           ListTile(
@@ -31,6 +38,10 @@ class DrawerMenu extends StatelessWidget {
             onTap: () {
               // İletişim seçeneğine tıklama işlemleri
               Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ContactScreen()),
+              );
             },
           ),
           ListTile(
@@ -41,6 +52,10 @@ class DrawerMenu extends StatelessWidget {
             onTap: () {
               // Çıkış seçeneğine tıklama işlemleri
               Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+              );
             },
           ),
         ],

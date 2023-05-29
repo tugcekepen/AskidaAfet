@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:askida_afet/drawer_menu.dart';
+import 'package:askida_afet/search_delegate.dart';
 
 class IhtiyacListesi extends StatefulWidget {
   @override
@@ -8,8 +9,15 @@ class IhtiyacListesi extends StatefulWidget {
 
 class _HomePageState extends State<IhtiyacListesi> {
   int _currentIndex = 0;
-  bool _isMenuOpen = false;
   GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
+  String searchText = '';
+
+  @override
+  void initState() {
+    super.initState();
+    searchText = '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +64,7 @@ class _HomePageState extends State<IhtiyacListesi> {
             ),
             onPressed: () {
               // İkon tıklama işlemleri
+              showSearch(context: context, delegate: Search_Delegate());
             },
             tooltip: 'Arama Yap'
           ),
