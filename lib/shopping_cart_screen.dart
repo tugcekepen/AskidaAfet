@@ -1,7 +1,82 @@
+import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
+import 'package:flutter/services.dart';
+import 'dart:math';
 
-class ShoppingCartScreen extends StatelessWidget {
+class ShoppingCartScreen extends StatefulWidget {
+  @override
+  _ShoppingCartScreenState createState() => _ShoppingCartScreenState();
+}
+
+class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
+  IhtiyacListesi iList = new IhtiyacListesi();
+  String requestCode = ''; // Talep Kodu
+
+  void generateRequestCode() {
+    setState(() {
+      requestCode = generateRandomCode();
+    });
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Talep Kodu'),
+          content: Text(requestCode),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.copy),
+              onPressed: () {
+                Clipboard.setData(ClipboardData(text: requestCode));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Talep Kodu Kopyalandı')),
+                );
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TalepFormu()),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  String generateRandomCode() {
+    Random random = Random();
+    return random.nextInt((9000000) + 1000000).toString();
+  }
+
+  void removeItem(String item) {
+    setState(() {
+      cartItems.remove(item);
+    });
+  }
+
+  void increaseItemCount(String item) {
+    setState(() {
+      if (cartItems.containsKey(item)) {
+        cartItems[item] = cartItems[item]! + 1;
+      } else {
+        cartItems[item] = 1;
+      }
+    });
+  }
+
+  void decreaseItemCount(String item) {
+    setState(() {
+      if (cartItems.containsKey(item)) {
+        if (cartItems[item]! > 1) {
+          cartItems[item] = cartItems[item]! - 1;
+        } else {
+          cartItems.remove(item);
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +101,7 @@ class ShoppingCartScreen extends StatelessWidget {
           },
         ),
       ),
-      body:Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
@@ -43,14 +118,28 @@ class ShoppingCartScreen extends StatelessWidget {
             height: 5,
             color: Color(0xFFCF0000),
           ),
+          if (cartItems.isEmpty)
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Center(
+                child: Text(
+                  'Sepetinizde ürün bulunmamaktadır.',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              color: Color(0xFFF4F4F4),
+            ),
           Expanded(
             child: Container(
               color: Color(0xFFF4F4F4),
               padding: EdgeInsets.all(16),
               child: ListView.builder(
-                itemCount: selectedItems.length,
+                itemCount: cartItems.length,
                 itemBuilder: (context, index) {
-                  final item = selectedItems[index];
+                  final item = cartItems.keys.elementAt(index);
+                  final count = cartItems[item];
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -64,21 +153,46 @@ class ShoppingCartScreen extends StatelessWidget {
                           child: Text(
                             item,
                             style: TextStyle(
-                              color: Color(0xFFCF0000),
                               fontSize: 16,
                             ),
                           ),
                         ),
                         IconButton(
                           onPressed: () {
-                            // İkon tıklama işlemleri
+                            decreaseItemCount(item);
+                          },
+                          icon: Icon(
+                            Icons.remove,
+                            color: Color(0xFFCF0000),
+                            size: 35,
+                          ),
+                        ),
+                        Text(
+                          '$count',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            increaseItemCount(item);
+                          },
+                          icon: Icon(
+                            Icons.add,
+                            color: Color(0xFFCF0000),
+                            size: 35,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            removeItem(item);
                           },
                           icon: Icon(
                             Icons.delete_outline_outlined,
                             color: Color(0xFFCF0000),
                             size: 35,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   );
@@ -86,11 +200,46 @@ class ShoppingCartScreen extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              'Talep Kodu oluşturduktan sonra kodu kopyalayıp "Talep" sayfasındaki formda "Talep Kodu" başlığı altına yapıştırınız.\n\nİhtiyaç Listesinde bulamadığınız ürünleri "Talep" sayfasındaki formu doldururken "Talepler" başlığı altına ve aralarına virgül koyarak yazınız.\n\nÖNEMLİ!',
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF0E194D),
+              ),
+            ),
+          ),
+          if (cartItems.isNotEmpty)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 8),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    generateRequestCode();
+                  },
+                  icon: Icon(Icons.copy),
+                  label: Text(
+                    'Talep Kodu Oluştur',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFC85353),
+                    onPrimary: Colors.white,
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 65), // boşluk değeri
+        padding: EdgeInsets.only(bottom: 65),
         child: FloatingActionButton(
           onPressed: () {
             // Chatbot ikonuna tıklandığında yapılacak işlemler
@@ -103,36 +252,8 @@ class ShoppingCartScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 30,
-              color: Colors.black,
-            ),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.help_outline_outlined,
-              size: 30,
-              color: Colors.black,
-            ),
-            label: 'Talep',
-          ),
-        ],
-      ),
-
-
-
-
-
-
-
-
-
     );
   }
-
 }
+
+Map<String, int> cartItems = {}; // Sepet öğeleri ve adetleri

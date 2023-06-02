@@ -3,6 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:askida_afet/drawer_menu.dart';
 import 'package:askida_afet/search_delegate.dart';
 
+/*void copyItemsToCart() {
+  cartItems.clear();
+  for (int i = 0; i < selectedItems.length; i++) {
+    String item = selectedItems[i];
+    if (selectedItems.contains(item)) {
+      cartItems[item] = (cartItems[item] ?? 0) + 1;
+    } else {
+      cartItems[item] = 1;
+    }
+  }
+}*/
+
 class IhtiyacListesi extends StatefulWidget {
   @override
   _IhtiyacListesiState createState() => _IhtiyacListesiState();
@@ -18,10 +30,6 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
   void initState() {
     super.initState();
     searchText = '';
-  }
-
-  void addToCart(String item) {
-    selectedItems.add(item);
   }
 
   @override
@@ -127,7 +135,11 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
                         IconButton(
                           onPressed: () {
                             // İkon tıklama işlemleri
-                            addToCart(item);
+                            if (cartItems.containsKey(item)) {
+                              cartItems[item] = cartItems[item]! + 1;
+                            } else {
+                              cartItems[item] = 1;
+                            }
                           },
                           icon: Icon(
                             Icons.add_circle,
@@ -188,21 +200,26 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
       drawer: DrawerMenu(),
     );
   }
-
-
 }
+
 List<String> itemList = [
-  'Elektrikli Isıtıcı',
+  'Battaniye',
+  'Bebek Maması',
   'Büyük-Küçük Tüp',
-  'Odun, Kömür Sobası-Odun',
   'Cep Isıtıcısı',
-  'Çocuk ve Erişkin Mont',
-  'Powerbank',
-  'Kadın-Erkek İç Giyim ve Çorap',
+  'Çadır',
+  'Çocuk-Yetişkin Bezi',
+  'Çocuk-Yetişkin İç Giyim',
+  'Çocuk-Yetişkin Mont',
+  'Elektrikli Isıtıcı',
+  'Hijyen Kolisi',
+  'Jeneratör',
   'Kadın-Erkek Ayakkabı',
+  'Kadın-Erkek İç Giyim ve Çorap',
+  'Odun, Kömür Sobası-Odun',
+  'Powerbank',
+  'Su-Ekmek-Hazır Gıda',
   'Uyku Tulumu-Yastık',
   'Yatak ve Nevresim Takımı',
-  'Su-Ekmek-Hazır Gıda',
 ];
 
-List<String> selectedItems = [];

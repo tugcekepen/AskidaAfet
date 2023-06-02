@@ -43,7 +43,11 @@ class Search_Delegate extends SearchDelegate<String> {
           title: Text(result),
           onTap: () {
             // Sonuç seçildiğinde yapılacak işlemler
-            selectedItems.add(result);
+            if (cartItems.containsKey(result)) {
+              cartItems[result] = cartItems[result]! + 1;
+            } else {
+              cartItems[result] = 1;
+            }
             Navigator.push(
               context,
               MaterialPageRoute(
