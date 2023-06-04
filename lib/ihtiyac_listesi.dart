@@ -2,6 +2,7 @@ import 'package:askida_afet/shopping_cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/drawer_menu.dart';
 import 'package:askida_afet/search_delegate.dart';
+import 'package:askida_afet/live_support_page.dart';
 
 /*void copyItemsToCart() {
   cartItems.clear();
@@ -161,6 +162,7 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
         padding: EdgeInsets.only(bottom: 65), // boşluk değeri
         child: FloatingActionButton(
           onPressed: () {
+            Navigator.pushNamed(context, '/liveSupport');
             // Chatbot ikonuna tıklandığında yapılacak işlemler
           },
           backgroundColor: Color(0xFFCF0000),

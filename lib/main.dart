@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:askida_afet/logo_screen.dart';
 import 'package:askida_afet/login_screen.dart';
+import 'live_support_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,8 +14,11 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(), // Başlangıç ekranı olarak SplashScreen'i kullanıyoruz
       routes: {
         '/loginScreen': (context) => LoginScreen(),
+        '/liveSupport': (context) => LiveSupportPage(),
+
       },
     );
+
   }
 }
 
