@@ -162,6 +162,8 @@ class _BagisciKimligiState extends State<BagisciKimligi> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black,
         currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {

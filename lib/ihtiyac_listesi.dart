@@ -164,13 +164,7 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,
-        selectedLabelStyle: TextStyle(
-          fontSize: 12,
-        ),
         unselectedItemColor: Colors.black,
-        unselectedLabelStyle: TextStyle(
-          fontSize: 12,
-        ),
         items: [
           BottomNavigationBarItem(
             icon: Icon(

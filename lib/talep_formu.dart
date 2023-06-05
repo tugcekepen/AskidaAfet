@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
-class TalepFormu extends StatelessWidget {
+import 'ihtiyac_listesi.dart';
+
+class TalepFormu extends StatefulWidget {
+  @override
+  _TalepFormuState createState() => _TalepFormuState();
+}
+
+class _TalepFormuState extends State<TalepFormu> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,164 +35,274 @@ class TalepFormu extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Text(
-                'Talep Formu',
-                style: TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Text(
+                  'Talep Formu',
+                  style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              height: 5,
-              color: Color(0xFFCF0000),
-            ),
-            Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'İhtiyaç Listesinde bulamadığınız ürünleri "Talepler" başlığı altına ve aralarına virgül koyarak yazınız.',
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Talep Kodu (Sepette oluşturuldu ise)',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Kopyalanan kodu BURAYA YAPIŞTIRINIZ',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                      keyboardType: TextInputType.number,
-                      maxLength: 7,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Talepler',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Aralarına virgül koyarak yazınız',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Ad Soyad',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: '*Zorunlu Alan',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Açık Adres',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: '*Zorunlu Alan',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Mail Adresi',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: '*Zorunlu Alan',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Telefon',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: '*Zorunlu Alan',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                    ),
-                  ),
-                ],
+              Container(
+                height: 5,
+                color: Color(0xFFCF0000),
               ),
-            ),
-          ],
+              Padding(
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'İhtiyaç Listesinde bulamadığınız ürünleri "Talepler" başlığı altına ve aralarına virgül koyarak yazınız.',
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Talep Kodu (Sepette oluşturuldu ise)',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Kopyalanan kodu BURAYA YAPIŞTIRINIZ',
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color:Color(0xFFCF0000))
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        ),
+                        cursorColor: Color(0xFFCF0000),
+                        keyboardType: TextInputType.number,
+                        maxLength: 7,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Talepler',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Aralarına virgül koyarak yazınız',
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color:Color(0xFFCF0000))
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        ),
+                        cursorColor: Color(0xFFCF0000),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Ad Soyad',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: '*Zorunlu Alan',
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color:Color(0xFFCF0000))
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        ),
+                        cursorColor: Color(0xFFCF0000),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Açık Adres',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: '*Zorunlu Alan',
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color:Color(0xFFCF0000))
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        ),
+                        cursorColor: Color(0xFFCF0000),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Mail Adresi',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: '*Zorunlu Alan',
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color:Color(0xFFCF0000))
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        ),
+                        cursorColor: Color(0xFFCF0000),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Telefon',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: '*Zorunlu Alan',
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color:Color(0xFFCF0000))
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        ),
+                        cursorColor: Color(0xFFCF0000),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          // Form geçerliyse gönderilecek işlemler burada yapılır
+                          final snackBar = SnackBar(content: Text('Form başarıyla gönderildi'));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else {
+                          // Form geçerli değilse hata mesajı gösterilir
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Hata'),
+                                content: Text('Zorunlu alanları doldurun.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Tamam'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
+                      child: Text('Gönder',
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFC85353),
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 65), // boşluk değeri
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/liveSupport');
+            // Chatbot ikonuna tıklandığında yapılacak işlemler
+          },
+          backgroundColor: Color(0xFFCF0000),
+          child: const Icon(
+            Icons.support_agent_outlined,
+            color: Colors.white,
+            size: 45,
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              size: 30,
+              color: Colors.black,
+            ),
+            label: 'Ana Sayfa',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.help_outline_outlined,
+              size: 30,
+              color: Colors.black,
+            ),
+            label: 'Talep Formu',
+          ),
+        ],
+        currentIndex: 1,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => IhtiyacListesi())
+              );
+              break;
+            case 1:
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TalepFormu())
+              );
+              break;
+          }
+        },
       ),
     );
   }

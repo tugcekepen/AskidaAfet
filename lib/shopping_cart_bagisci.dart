@@ -238,6 +238,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
         child: FloatingActionButton(
           onPressed: () {
             // Chatbot ikonuna tıklandığında yapılacak işlemler
+            Navigator.pushNamed(context, '/liveSupport');
           },
           backgroundColor: Color(0xFFCF0000),
           child: const Icon(

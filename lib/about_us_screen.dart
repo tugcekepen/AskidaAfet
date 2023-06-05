@@ -59,10 +59,12 @@ Bu şekilde toplumun birlikte hareket etmesini ve afetlerle mücadelede birbirin
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             hintText: 'ornek@gmail.com',
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(10.0))),
-
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                borderSide: BorderSide(color:Color(0xFFCF0000))
+                            ),
                           ),
+                          cursorColor: Color(0xFFCF0000),
                         ),
                         SizedBox(height: 10),
                         Center(

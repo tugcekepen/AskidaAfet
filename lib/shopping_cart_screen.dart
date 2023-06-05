@@ -43,7 +43,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               child: Text('Tamam'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFC85353),
-                padding: EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0),
                 ),
