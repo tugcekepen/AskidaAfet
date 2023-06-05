@@ -11,7 +11,7 @@ class ContactScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),
-          width: 450,
+          width: 400,
           child: Center(
             child: Card(
               color: Color(0xFFEDEDED),
@@ -41,12 +41,12 @@ class ContactScreen extends StatelessWidget {
                           color: Colors.black,
                           size: 60,
                         ),
-                        SizedBox(width: 30),
+                        SizedBox(width: 20),
                         Text(
                           'askidafet@mobile.app.com',
                           style: TextStyle(
                             color: Color(0xFFB4483D),
-                            fontSize: 20,
+                            fontSize: 15,
                           ),
                         ),
                       ],

@@ -66,6 +66,7 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> {
                         cursorColor: Color(0xFFCF0000),
                         decoration: InputDecoration(
                           labelText: 'Ad Soyad',
+                          hintText: '*Zorunlu Alan',
                           labelStyle: TextStyle(color: Color.fromARGB(255, 116, 113, 113) ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color:Color(0xFFCF0000)), // Odaklandığında kullanılacak kenarlık rengi
@@ -81,6 +82,7 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> {
                         controller: tcKimlikNoController,
                         decoration: InputDecoration(
                           labelText: 'TC Kimlik No',
+                          hintText: '*Zorunlu Alan',
                           labelStyle: TextStyle(color: Color.fromARGB(255, 116, 113, 113) ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color:Color(0xFFCF0000)), // Odaklandığında kullanılacak kenarlık rengi
@@ -97,6 +99,7 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> {
                         controller: telefonController,
                         decoration: InputDecoration(
                           labelText: 'Telefon Numarası',
+                          hintText: '*Zorunlu Alan',
                           labelStyle: TextStyle(color: Color.fromARGB(255, 116, 113, 113) ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color:Color(0xFFCF0000)), // Odaklandığında kullanılacak kenarlık rengi
@@ -113,6 +116,7 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> {
                         controller: adresController,
                         decoration: InputDecoration(
                           labelText: 'Adres',
+                          hintText: '*Zorunlu Alan',
                           labelStyle: TextStyle(color: Color.fromARGB(255, 116, 113, 113) ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color:Color(0xFFCF0000)), // Odaklandığında kullanılacak kenarlık rengi
@@ -134,7 +138,11 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> {
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Color(0xFFCF0000), // Butonun arka plan rengi
+                            backgroundColor: Color(0xFFC85353),
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100.0),
+                            ),// Butonun arka plan rengi
                           ),
                           child: Text('Adrese Kargo İste'),
                         ),

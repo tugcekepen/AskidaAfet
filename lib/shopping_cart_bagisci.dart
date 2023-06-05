@@ -5,6 +5,8 @@ import 'package:askida_afet/ihtiyac_listesi.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
 
+import 'live_support_page.dart';
+
 class BagisciShopping extends StatefulWidget {
   @override
   _BagisciShoppingState createState() => _BagisciShoppingState();
@@ -238,7 +240,9 @@ class _BagisciShoppingState extends State<BagisciShopping> {
         child: FloatingActionButton(
           onPressed: () {
             // Chatbot ikonuna tıklandığında yapılacak işlemler
-            Navigator.pushNamed(context, '/liveSupport');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LiveSupportPage()),);
           },
           backgroundColor: Color(0xFFCF0000),
           child: const Icon(

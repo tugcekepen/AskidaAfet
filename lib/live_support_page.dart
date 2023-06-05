@@ -133,16 +133,24 @@ class _LiveSupportPageState extends State<LiveSupportPage> {
 
   void sendMessage(String content) {
     setState(() {
-      messages.insert(0, Message(content: content, isUserMessage: true)); // Kullanıcının gönderdiği mesajı ekler
-      messages.insert(0, Message(content: generateResponse(content), isUserMessage: false)); // Otomatik cevabı ekler
+      messages.insert(0, Message(content: content, isUserMessage: true));
+      if (content.toLowerCase().contains('bağış yapmak istiyorum')) {
+        messages.insert(
+          0,
+          Message(content: 'Bağış yapmak istiyorsanız IBAN numarası: XXXX-XXXX-XXXX-XXXX', isUserMessage: false),
+        );
+      } else {
+        messages.insert(0, Message(content: 'Merhaba! Nasıl yardımcı olabilirim?', isUserMessage: false));
+      }
     });
   }
-
-  String generateResponse(String message) {
-    // Mesaja göre uygun bir otomatik cevap üretin ve döndürün
-    return "Merhaba! Nasıl yardımcı olabilirim?";
-  }
 }
+
+String generateResponse(String message) {
+  // Mesaja göre uygun bir otomatik cevap üretin ve döndürün
+  return "Merhaba! Nasıl yardımcı olabilirim?";
+}
+
 
 class Message {
   final String content;

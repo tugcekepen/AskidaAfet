@@ -151,7 +151,9 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
         padding: EdgeInsets.only(bottom: 65), // boşluk değeri
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/liveSupport');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LiveSupportPage()),);
             // Chatbot ikonuna tıklandığında yapılacak işlemler
           },
           backgroundColor: Color(0xFFCF0000),

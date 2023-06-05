@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:askida_afet/shopping_cart_screen.dart';
 import 'ihtiyac_listesi.dart';
+
+String yapistirilanKod = kopyalananKod;
+bool kodOlusturuldu = false;
 
 class TalepFormu extends StatefulWidget {
   @override
@@ -9,6 +12,10 @@ class TalepFormu extends StatefulWidget {
 
 class _TalepFormuState extends State<TalepFormu> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _adSoyadController = TextEditingController();
+  TextEditingController _adresController = TextEditingController();
+  TextEditingController _mailController = TextEditingController();
+  TextEditingController _telefonController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +89,13 @@ class _TalepFormuState extends State<TalepFormu> {
                           ),
                           contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         ),
+                        initialValue: kodOlusturuldu ? kopyalananKod : null,
                         cursorColor: Color(0xFFCF0000),
                         keyboardType: TextInputType.number,
                         maxLength: 7,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 0),
                     Text(
                       'Talepler',
                       style: TextStyle(
@@ -108,6 +116,12 @@ class _TalepFormuState extends State<TalepFormu> {
                           contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         ),
                         cursorColor: Color(0xFFCF0000),
+                        validator: (value) {
+                          if (!kodOlusturuldu && (value == null || value.isEmpty)) {
+                            return 'Talep kodunuz yok ise Talepler alanını doldurmanız zorunludur.'; // Doğrulama hatası mesajı
+                          }
+                          return null; // Geçerli değer
+                        },
                       ),
                     ),
                     SizedBox(height: 10),
@@ -123,6 +137,13 @@ class _TalepFormuState extends State<TalepFormu> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextFormField(
+                        controller: _adSoyadController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Ad Soyad alanını doldurunuz.'; // Ad Soyad alanı boş ise hata mesajı döndürülür
+                          }
+                          return null; // Geçerli bir değer olduğunda null döndürülür
+                        },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
                           focusedBorder: OutlineInputBorder(
@@ -146,6 +167,13 @@ class _TalepFormuState extends State<TalepFormu> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextFormField(
+                        controller: _adresController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Açık Adres alanını doldurunuz.'; // Ad Soyad alanı boş ise hata mesajı döndürülür
+                          }
+                          return null; // Geçerli bir değer olduğunda null döndürülür
+                        },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
                           focusedBorder: OutlineInputBorder(
@@ -169,6 +197,13 @@ class _TalepFormuState extends State<TalepFormu> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextFormField(
+                        controller: _mailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Mail Adresi alanını doldurunuz.'; // Ad Soyad alanı boş ise hata mesajı döndürülür
+                          }
+                          return null; // Geçerli bir değer olduğunda null döndürülür
+                        },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
                           focusedBorder: OutlineInputBorder(
@@ -192,6 +227,13 @@ class _TalepFormuState extends State<TalepFormu> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextFormField(
+                        controller: _telefonController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Telefon alanını doldurunuz.'; // Ad Soyad alanı boş ise hata mesajı döndürülür
+                          }
+                          return null; // Geçerli bir değer olduğunda null döndürülür
+                        },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
                           focusedBorder: OutlineInputBorder(
@@ -200,9 +242,11 @@ class _TalepFormuState extends State<TalepFormu> {
                           contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         ),
                         cursorColor: Color(0xFFCF0000),
+                        keyboardType: TextInputType.number,
+                        maxLength: 11,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 0),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {

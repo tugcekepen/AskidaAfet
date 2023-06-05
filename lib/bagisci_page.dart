@@ -4,6 +4,9 @@ import 'package:askida_afet/search_delegate.dart';
 import 'package:askida_afet/shopping_cart_bagisci.dart';
 import 'package:flutter/material.dart';
 
+import 'bilgi_alma_ekrani.dart';
+import 'live_support_page.dart';
+
 class BagisciKimligi extends StatefulWidget {
   @override
   _BagisciKimligiState createState() => _BagisciKimligiState();
@@ -152,6 +155,9 @@ class _BagisciKimligiState extends State<BagisciKimligi> {
         child: FloatingActionButton(
           onPressed: () {
             // Chatbot ikonuna tıklandığında yapılacak işlemler
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LiveSupportPage()),);
           },
           backgroundColor: Color(0xFFCF0000),
           child: const Icon(
@@ -164,12 +170,6 @@ class _BagisciKimligiState extends State<BagisciKimligi> {
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -186,9 +186,26 @@ class _BagisciKimligiState extends State<BagisciKimligi> {
               size: 30,
               color: Colors.black,
             ),
-            label: 'Talep',
+            label: 'Talep Formu',
           ),
         ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BagisciKimligi())
+              );
+              break;
+            case 1:
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BilgiAlmaEkrani())
+              );
+              break;
+          }
+        },
+
       ),
       drawer: DrawerMenu(),
     );

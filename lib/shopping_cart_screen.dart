@@ -4,6 +4,13 @@ import 'package:askida_afet/ihtiyac_listesi.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
 
+String generateRandomCode() {
+  Random random = Random();
+  return random.nextInt((9000000) + 1000000).toString();
+}
+
+String kopyalananKod = generateRandomCode();
+
 class ShoppingCartScreen extends StatefulWidget {
   @override
   _ShoppingCartScreenState createState() => _ShoppingCartScreenState();
@@ -55,10 +62,6 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     );
   }
 
-  String generateRandomCode() {
-    Random random = Random();
-    return random.nextInt((9000000) + 1000000).toString();
-  }
 
   void removeItem(String item) {
     setState(() {
@@ -228,6 +231,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () {
+                    kodOlusturuldu = true;
                     generateRequestCode();
                   },
                   icon: Icon(Icons.copy),
@@ -237,7 +241,6 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFC85353),
-                    onPrimary: Colors.white,
                     padding: EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100.0),
