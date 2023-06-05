@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
+import 'bagisci_page.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -53,6 +54,12 @@ class LoginScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         // "Bağışçıyım" butonuna tıklandığında yapılacak işlemler
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BagisciKimligi(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFC85353),
