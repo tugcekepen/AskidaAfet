@@ -24,17 +24,20 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
         title: Text(
-          'Gönderici Bilgi Ekranı',
+          'ASKIDA AFET',
           style: TextStyle(
-            color: Colors.black, // Başlık metin rengi
+            color: Color(0xFF3B3B3B),
+            fontWeight: FontWeight.bold,
+            fontSize: 21,
           ),
         ),
-        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black, // Geri butonu rengi
+            Icons.arrow_back_ios_new_outlined,
+            color: Color(0xFF3B3B3B), // Geri butonunun rengi
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -44,9 +47,24 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> {
       body: SingleChildScrollView(
         // Sayfayı kaydırılabilir hale getirir
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Text(
+                  'Bağış Formu',
+                  style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                height: 5,
+                color: Color(0xFFCF0000),
+              ),
               Align(
                 alignment: Alignment.center,
                 child: Container(

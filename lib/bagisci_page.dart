@@ -1,11 +1,10 @@
 import 'package:askida_afet/drawer_menu.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
+import 'package:askida_afet/live_support_page_b.dart';
 import 'package:askida_afet/search_delegate.dart';
 import 'package:askida_afet/shopping_cart_bagisci.dart';
 import 'package:flutter/material.dart';
-
 import 'bilgi_alma_ekrani.dart';
-import 'live_support_page.dart';
 
 class BagisciKimligi extends StatefulWidget {
   @override
@@ -85,7 +84,7 @@ class _BagisciKimligiState extends State<BagisciKimligi> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Text(
-              'İhtiyaç Listesi',
+              'Bağış İhtiyaç Listesi',
               style: TextStyle(
                 fontSize: 19,
                 fontWeight: FontWeight.bold,
@@ -157,7 +156,7 @@ class _BagisciKimligiState extends State<BagisciKimligi> {
             // Chatbot ikonuna tıklandığında yapılacak işlemler
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LiveSupportPage()),);
+              MaterialPageRoute(builder: (context) => LiveSupportPageB()),);
           },
           backgroundColor: Color(0xFFCF0000),
           child: const Icon(
@@ -186,7 +185,7 @@ class _BagisciKimligiState extends State<BagisciKimligi> {
               size: 30,
               color: Colors.black,
             ),
-            label: 'Talep Formu',
+            label: 'Bağış Formu',
           ),
         ],
         onTap: (index) {

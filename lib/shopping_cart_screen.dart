@@ -121,7 +121,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Text(
-              'Sepet',
+              'İhtiyaç Sepeti',
               style: TextStyle(
                 fontSize: 19,
                 fontWeight: FontWeight.bold,

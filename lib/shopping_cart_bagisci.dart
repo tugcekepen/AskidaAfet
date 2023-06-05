@@ -16,42 +16,6 @@ class _BagisciShoppingState extends State<BagisciShopping> {
   IhtiyacListesi iList = new IhtiyacListesi();
   String requestCode = ''; // Talep Kodu
 
-  void generateRequestCode() {
-    setState(() {
-      requestCode = generateRandomCode();
-    });
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Talep Kodu'),
-          content: Text(requestCode),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.copy),
-              onPressed: () {
-                Clipboard.setData(ClipboardData(text: requestCode));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Talep Kodu Kopyalandı')),
-                );
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TalepFormu()),
-                );
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  String generateRandomCode() {
-    Random random = Random();
-    return random.nextInt((9000000) + 1000000).toString();
-  }
-
   void removeItem(String item) {
     setState(() {
       cartItems.remove(item);
@@ -110,7 +74,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Text(
-              'Sepet',
+              'Bağış Sepeti',
               style: TextStyle(
                 fontSize: 19,
                 fontWeight: FontWeight.bold,
