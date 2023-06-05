@@ -1,3 +1,4 @@
+import 'package:askida_afet/ihtiyac_listesi.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsScreen extends StatefulWidget {
@@ -68,6 +69,34 @@ Bu şekilde toplumun birlikte hareket etmesini ve afetlerle mücadelede birbirin
                           child: ElevatedButton(
                             onPressed: () {
                               // Geri dönüş işlemleri
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Teşekkürler!"),
+                                    content: Text('Mail adresin ekiplere iletildi. En yakın zamanda geri dönüş alacaksın.'),
+                                    actions: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => IhtiyacListesi()),
+                                          );
+                                        },
+                                        child: Text('Tamam'),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(0xFFC85353),
+                                          padding: EdgeInsets.symmetric(vertical: 12),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(100.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xFFC85353),

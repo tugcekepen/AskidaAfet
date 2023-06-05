@@ -1,20 +1,9 @@
 import 'package:askida_afet/shopping_cart_screen.dart';
+import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/drawer_menu.dart';
 import 'package:askida_afet/search_delegate.dart';
 import 'package:askida_afet/live_support_page.dart';
-
-/*void copyItemsToCart() {
-  cartItems.clear();
-  for (int i = 0; i < selectedItems.length; i++) {
-    String item = selectedItems[i];
-    if (selectedItems.contains(item)) {
-      cartItems[item] = (cartItems[item] ?? 0) + 1;
-    } else {
-      cartItems[item] = 1;
-    }
-  }
-}*/
 
 class IhtiyacListesi extends StatefulWidget {
   @override
@@ -174,12 +163,14 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+        selectedItemColor: Colors.black,
+        selectedLabelStyle: TextStyle(
+          fontSize: 12,
+        ),
+        unselectedItemColor: Colors.black,
+        unselectedLabelStyle: TextStyle(
+          fontSize: 12,
+        ),
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -195,9 +186,25 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
               size: 30,
               color: Colors.black,
             ),
-            label: 'Talep',
+            label: 'Talep Formu',
           ),
         ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => IhtiyacListesi())
+              );
+              break;
+            case 1:
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TalepFormu())
+              );
+              break;
+          }
+        },
       ),
       drawer: DrawerMenu(),
     );

@@ -1,3 +1,5 @@
+import 'package:askida_afet/ihtiyac_listesi.dart';
+import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
 
 class LiveSupportPage extends StatelessWidget {
@@ -7,11 +9,11 @@ class LiveSupportPage extends StatelessWidget {
       backgroundColor: Color(0xFF707070),
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(), // Geri butonuna tıklanınca önceki sayfaya dön
         ),
-        title: Text('Canlı Destek', style: TextStyle(color: Colors.black)),
-        backgroundColor: Colors.red,
+        title: Text('Canlı Destek', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF962929),
       ),
       body: Column(
         children: [
@@ -53,7 +55,13 @@ class LiveSupportPage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
+        selectedLabelStyle: TextStyle(
+          fontSize: 12,
+        ),
         unselectedItemColor: Colors.black,
+        unselectedLabelStyle: TextStyle(
+          fontSize: 12,
+        ),
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -67,16 +75,22 @@ class LiveSupportPage extends StatelessWidget {
               Icons.help_outline_outlined,
               size: 30,
             ),
-            label: 'Talep',
+            label: 'Talep Formu',
           ),
         ],
         onTap: (index) {
           switch (index) {
             case 0:
-              Navigator.pushNamed(context, '/home');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => IhtiyacListesi())
+              );
               break;
             case 1:
-              Navigator.pushNamed(context, '/request');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TalepFormu())
+              );
               break;
           }
         },

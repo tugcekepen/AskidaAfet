@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SplashScreen(), // Başlangıç ekranı olarak SplashScreen'i kullanıyoruz
+      debugShowCheckedModeBanner: false,
       routes: {
         '/loginScreen': (context) => LoginScreen(),
         '/liveSupport': (context) => LiveSupportPage(),

@@ -13,30 +13,41 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   IhtiyacListesi iList = new IhtiyacListesi();
   String requestCode = ''; // Talep Kodu
 
+  /*void showNotification(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }*/
+
   void generateRequestCode() {
     setState(() {
       requestCode = generateRandomCode();
     });
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Talep Kodu'),
-          content: Text(requestCode),
+          title: Text(requestCode),
+          content: Text('Talep kodu kopyalandı'),
           actions: [
-            IconButton(
-              icon: Icon(Icons.copy),
+            ElevatedButton(
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: requestCode));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Talep Kodu Kopyalandı')),
-                );
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => TalepFormu()),
                 );
               },
+              child: Text('Tamam'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFC85353),
+                padding: EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.0),
+                ),
+              ),
             ),
           ],
         );
@@ -243,6 +254,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         child: FloatingActionButton(
           onPressed: () {
             // Chatbot ikonuna tıklandığında yapılacak işlemler
+            Navigator.pushNamed(context, '/liveSupport');
           },
           backgroundColor: Color(0xFFCF0000),
           child: const Icon(
