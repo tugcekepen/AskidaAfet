@@ -130,6 +130,8 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> {
                             } else {
                               cartItems[item] = 1;
                             }
+                            final snackBar = SnackBar(content: Text('Sepetinize ürün eklendi'),);
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           },
                           icon: Icon(
                             Icons.add_circle,
