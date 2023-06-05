@@ -1,3 +1,4 @@
+import 'package:askida_afet/bagisci_page.dart';
 import 'package:askida_afet/bilgi_alma_ekrani.dart';
 import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
@@ -90,11 +91,54 @@ class _BagisciShoppingState extends State<BagisciShopping> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Center(
-                child: Text(
-                  'Sepetinizde ürün bulunmamaktadır.',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Sepetinizde ürün bulunmamaktadır.',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BagisciKimligi(),
+                          ),
+                        );
+                      },
+                      child: Text('İhtiyaç Listesine Git'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFC85353),
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BilgiAlmaEkrani(),
+                          ),
+                        );
+                      },
+                      child: Text('Bağış Formuna Git'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFC85353),
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               color: Color(0xFFF4F4F4),
@@ -187,7 +231,6 @@ class _BagisciShoppingState extends State<BagisciShopping> {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFC85353),
-                    onPrimary: Colors.white,
                     padding: EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100.0),
