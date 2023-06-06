@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:askida_afet/shopping_cart_screen.dart';
 import 'ihtiyac_listesi.dart';
 
-String yapistirilanKod = kopyalananKod;
 bool kodOlusturuldu = false;
 
 class TalepFormu extends StatefulWidget {
@@ -89,7 +88,7 @@ class _TalepFormuState extends State<TalepFormu> {
                           ),
                           contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         ),
-                        initialValue: kodOlusturuldu ? kopyalananKod : null,
+                        initialValue: kodOlusturuldu ? requestCode : null,
                         cursorColor: Color(0xFFCF0000),
                         keyboardType: TextInputType.number,
                         maxLength: 7,
@@ -117,8 +116,8 @@ class _TalepFormuState extends State<TalepFormu> {
                         ),
                         cursorColor: Color(0xFFCF0000),
                         validator: (value) {
-                          if (!kodOlusturuldu && (value == null || value.isEmpty)) {
-                            return 'Talep kodunuz yok ise Talepler alanını doldurmanız zorunludur.'; // Doğrulama hatası mesajı
+                          if ((value == null || value.isEmpty)) {
+                            return 'Talep kodunuz yok ise taleplerinizi yazınız.\nTalep kodunuz var ise Talep Kodu başlığı altına yapıştırın.'; // Doğrulama hatası mesajı
                           }
                           return null; // Geçerli değer
                         },

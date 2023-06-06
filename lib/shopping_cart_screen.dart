@@ -9,7 +9,7 @@ String generateRandomCode() {
   return random.nextInt((9000000) + 1000000).toString();
 }
 
-String kopyalananKod = generateRandomCode();
+String requestCode = ''; // Talep Kodu
 
 class ShoppingCartScreen extends StatefulWidget {
   @override
@@ -18,13 +18,7 @@ class ShoppingCartScreen extends StatefulWidget {
 
 class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   IhtiyacListesi iList = new IhtiyacListesi();
-  String requestCode = ''; // Talep Kodu
 
-  /*void showNotification(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
-  }*/
 
   void generateRequestCode() {
     setState(() {
@@ -111,7 +105,12 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
             color: Color(0xFF3B3B3B), // Geri butonunun rengi
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => IhtiyacListesi(),
+              ),
+            );
           },
         ),
       ),

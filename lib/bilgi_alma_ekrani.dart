@@ -107,8 +107,9 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> {
                           ),
                         ),
                         keyboardType: TextInputType.number,
+                        maxLength: 11,
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height:0),
                       TextField(
                         onTap: () {
                           FocusScope.of(context).unfocus(); // TextField focusundan çık
@@ -124,8 +125,9 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> {
                           ),
                         ),
                         keyboardType: TextInputType.number,
+                        maxLength: 11,
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: 0),
                       TextField(
                         onTap: () {
                           FocusScope.of(context).unfocus(); // TextField focusundan çık

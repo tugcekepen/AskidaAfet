@@ -126,10 +126,10 @@ class _BagisciKimligiState extends State<BagisciKimligi> {
                             final snackBar = SnackBar(content: Text('Göndermek istediğiniz ürün eklendi'),);
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             // İkon tıklama işlemleri
-                            if (cartItems.containsKey(item)) {
-                              cartItems[item] = cartItems[item]! + 1;
+                            if (cartItemsB.containsKey(item)) {
+                              cartItemsB[item] = cartItemsB[item]! + 1;
                             } else {
-                              cartItems[item] = 1;
+                              cartItemsB[item] = 1;
                             }
 
                           },

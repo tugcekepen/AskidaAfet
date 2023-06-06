@@ -1,11 +1,8 @@
 import 'package:askida_afet/bagisci_page.dart';
 import 'package:askida_afet/bilgi_alma_ekrani.dart';
-import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
 import 'package:flutter/services.dart';
-import 'dart:math';
-
 import 'live_support_page.dart';
 
 class BagisciShopping extends StatefulWidget {
@@ -19,27 +16,27 @@ class _BagisciShoppingState extends State<BagisciShopping> {
 
   void removeItem(String item) {
     setState(() {
-      cartItems.remove(item);
+      cartItemsB.remove(item);
     });
   }
 
   void increaseItemCount(String item) {
     setState(() {
-      if (cartItems.containsKey(item)) {
-        cartItems[item] = cartItems[item]! + 1;
+      if (cartItemsB.containsKey(item)) {
+        cartItemsB[item] = cartItemsB[item]! + 1;
       } else {
-        cartItems[item] = 1;
+        cartItemsB[item] = 1;
       }
     });
   }
 
   void decreaseItemCount(String item) {
     setState(() {
-      if (cartItems.containsKey(item)) {
-        if (cartItems[item]! > 1) {
-          cartItems[item] = cartItems[item]! - 1;
+      if (cartItemsB.containsKey(item)) {
+        if (cartItemsB[item]! > 1) {
+          cartItemsB[item] = cartItemsB[item]! - 1;
         } else {
-          cartItems.remove(item);
+          cartItemsB.remove(item);
         }
       }
     });
@@ -65,7 +62,12 @@ class _BagisciShoppingState extends State<BagisciShopping> {
             color: Color(0xFF3B3B3B), // Geri butonunun rengi
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BagisciKimligi(),
+              ),
+            );
           },
         ),
       ),
@@ -82,12 +84,11 @@ class _BagisciShoppingState extends State<BagisciShopping> {
               ),
             ),
           ),
-
           Container(
             height: 5,
             color: Color(0xFFCF0000),
           ),
-          if (cartItems.isEmpty)
+          if (cartItemsB.isEmpty)
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Center(
@@ -143,16 +144,15 @@ class _BagisciShoppingState extends State<BagisciShopping> {
               ),
               color: Color(0xFFF4F4F4),
             ),
-
           Expanded(
             child: Container(
               color: Color(0xFFF4F4F4),
               padding: EdgeInsets.all(16),
               child: ListView.builder(
-                itemCount: cartItems.length,
+                itemCount: cartItemsB.length,
                 itemBuilder: (context, index) {
-                  final item = cartItems.keys.elementAt(index);
-                  final count = cartItems[item];
+                  final item = cartItemsB.keys.elementAt(index);
+                  final count = cartItemsB[item];
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -213,7 +213,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
               ),
             ),
           ),
-          if (cartItems.isNotEmpty)
+          if (cartItemsB.isNotEmpty)
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 80, vertical: 8),
               child: SizedBox(
@@ -263,4 +263,4 @@ class _BagisciShoppingState extends State<BagisciShopping> {
   }
 }
 
-Map<String, int> cartItems = {}; // Sepet öğeleri ve adetleri
+Map<String, int> cartItemsB = {}; // Sepet öğeleri ve adetleri

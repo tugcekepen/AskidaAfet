@@ -1,7 +1,5 @@
 import 'package:askida_afet/bagisci_page.dart';
 import 'package:askida_afet/bilgi_alma_ekrani.dart';
-import 'package:askida_afet/ihtiyac_listesi.dart';
-import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
 
 class LiveSupportPageB extends StatefulWidget {
@@ -139,7 +137,7 @@ class _LiveSupportPageState extends State<LiveSupportPageB> {
       if (content.toLowerCase().contains('bağış yapmak istiyorum')) {
         messages.insert(
           0,
-          Message(content: 'Bağış yapmak istiyorsanız IBAN numarası: XXXX-XXXX-XXXX-XXXX', isUserMessage: false),
+          Message(content: 'Bağış yapmak istiyorsanız\nIBAN numarası: XXXX-XXXX-XXXX-XXXX', isUserMessage: false),
         );
       } else {
         messages.insert(0, Message(content: 'Merhaba! Nasıl yardımcı olabilirim?', isUserMessage: false));

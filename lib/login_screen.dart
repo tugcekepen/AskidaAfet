@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
 import 'bagisci_page.dart';
 
+int page = 0;
+
 class LoginScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +27,7 @@ class LoginScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         // "İhtiyaç Sahibiyim" butonuna tıklandığında yapılacak işlemler
+                        page =0;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -54,6 +58,7 @@ class LoginScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         // "Bağışçıyım" butonuna tıklandığında yapılacak işlemler
+                        page = 1;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
