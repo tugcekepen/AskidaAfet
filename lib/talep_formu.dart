@@ -1,20 +1,79 @@
+import 'package:askida_afet/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/shopping_cart_screen.dart';
 import 'ihtiyac_listesi.dart';
 
-bool kodOlusturuldu = false;
 
-class TalepFormu extends StatefulWidget {
+bool kodOlusturuldu = false;
+TextEditingController _taleplerController = TextEditingController();
+TextEditingController _adSoyadController = TextEditingController();
+TextEditingController _adresController = TextEditingController();
+TextEditingController _mailController = TextEditingController();
+TextEditingController _telefonController = TextEditingController();
+
+class TalepFormu extends StatefulWidget{
   @override
   _TalepFormuState createState() => _TalepFormuState();
 }
 
-class _TalepFormuState extends State<TalepFormu> {
+class _TalepFormuState extends State<TalepFormu> with FirebaseService {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _adSoyadController = TextEditingController();
-  TextEditingController _adresController = TextEditingController();
-  TextEditingController _mailController = TextEditingController();
-  TextEditingController _telefonController = TextEditingController();
+
+  void sendFormToFirebase() {
+    String girdi = _taleplerController.text;
+    List<String> talepler = girdi.split(',');
+    talepler = talepler.map((talep) => talep.trim()).toList();
+
+    final formValues = {
+      'talep_kodu': requestCode,
+      'talepler': talepler,
+      'ad_soyad': _adSoyadController.text,
+      'adres': _adresController.text,
+      'mail': _mailController.text,
+      'telefon': _telefonController.text,
+    };
+
+    sendFormData(formValues, 'talep_forms')
+        .then((_) {
+      // Gönderme işlemi başarılı olduğunda yapılacak işlemler
+      cartItems = {};
+      requestCode = "";
+      _taleplerController.text = "";
+      _adSoyadController.text = "";
+      _adresController.text = "";
+      _mailController.text= "";
+      _telefonController.text = "";
+      final snackBar = SnackBar(content: Text('Form başarıyla gönderildi'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => IhtiyacListesi(),
+        ),
+      );
+    })
+        .catchError((error) {
+      // Gönderme işlemi sırasında bir hata oluştuğunda yapılacak işlemler
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Hata'),
+            content: Text('Form gönderilirken bir hata oluştu. Tekrar deneyin.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Tamam'),
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +166,7 @@ class _TalepFormuState extends State<TalepFormu> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextFormField(
+                        controller: _taleplerController,
                         decoration: InputDecoration(
                           hintText: 'Aralarına virgül koyarak yazınız',
                           focusedBorder: OutlineInputBorder(
@@ -116,10 +176,12 @@ class _TalepFormuState extends State<TalepFormu> {
                         ),
                         cursorColor: Color(0xFFCF0000),
                         validator: (value) {
-                          if ((value == null || value.isEmpty)) {
-                            return 'Talep kodunuz yok ise taleplerinizi yazınız.\nTalep kodunuz var ise Talep Kodu başlığı altına yapıştırın.'; // Doğrulama hatası mesajı
+                          if ((requestCode == null || requestCode.isEmpty)) {
+                            if (value == null || value.isEmpty) {
+                              return 'Talep kodunuz yok ise taleplerinizi yazınız.\nTalep kodunuz var ise Talep Kodu başlığı altına yapıştırın.';
+                            }
                           }
-                          return null; // Geçerli değer
+                          return null;
                         },
                       ),
                     ),
@@ -141,7 +203,7 @@ class _TalepFormuState extends State<TalepFormu> {
                           if (value == null || value.isEmpty) {
                             return 'Ad Soyad alanını doldurunuz.'; // Ad Soyad alanı boş ise hata mesajı döndürülür
                           }
-                          return null; // Geçerli bir değer olduğunda null döndürülür
+                          return null;
                         },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
@@ -169,9 +231,9 @@ class _TalepFormuState extends State<TalepFormu> {
                         controller: _adresController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Açık Adres alanını doldurunuz.'; // Ad Soyad alanı boş ise hata mesajı döndürülür
+                            return 'Açık Adres alanını doldurunuz.';
                           }
-                          return null; // Geçerli bir değer olduğunda null döndürülür
+                          return null;
                         },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
@@ -199,9 +261,9 @@ class _TalepFormuState extends State<TalepFormu> {
                         controller: _mailController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Mail Adresi alanını doldurunuz.'; // Ad Soyad alanı boş ise hata mesajı döndürülür
+                            return 'Mail Adresi alanını doldurunuz.';
                           }
-                          return null; // Geçerli bir değer olduğunda null döndürülür
+                          return null;
                         },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
@@ -229,9 +291,9 @@ class _TalepFormuState extends State<TalepFormu> {
                         controller: _telefonController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Telefon alanını doldurunuz.'; // Ad Soyad alanı boş ise hata mesajı döndürülür
+                            return 'Telefon alanını doldurunuz.';
                           }
-                          return null; // Geçerli bir değer olduğunda null döndürülür
+                          return null;
                         },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
@@ -246,42 +308,45 @@ class _TalepFormuState extends State<TalepFormu> {
                       ),
                     ),
                     SizedBox(height: 0),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Form geçerliyse gönderilecek işlemler burada yapılır
-                          final snackBar = SnackBar(content: Text('Form başarıyla gönderildi'));
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        } else {
-                          // Form geçerli değilse hata mesajı gösterilir
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Hata'),
-                                content: Text('Zorunlu alanları doldurun.'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('Tamam'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      },
-                      child: Text('Gönder',
-                      style: TextStyle(
-                        fontSize: 17,
-                      ),),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFC85353),
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100.0),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // Form geçerliyse gönderilecek işlemler burada yapılır
+                            sendFormToFirebase();
+                          } else {
+                            // Form geçerli değilse hata mesajı gösterilir
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Hata'),
+                                  content: Text('Zorunlu alanları doldurun.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Tamam'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        },
+                        child: Text('Gönder',
+                          style: TextStyle(
+                            fontSize: 17,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFFC85353),
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100.0),
+                          ),
                         ),
                       ),
                     ),
