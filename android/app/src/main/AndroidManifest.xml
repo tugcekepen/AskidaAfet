@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.askidafet.askida_afet">
+    <uses-sdk
+        android:minSdkVersion="19" />
    <application
         android:label="askida_afet"
         android:name="${applicationName}"
