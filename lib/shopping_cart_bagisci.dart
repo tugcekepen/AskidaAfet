@@ -1,5 +1,5 @@
-import 'package:askida_afet/bagisci_page.dart';
-import 'package:askida_afet/bilgi_alma_ekrani.dart';
+import 'package:askida_afet/bagis_listesi.dart';
+import 'package:askida_afet/bagis_formu.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
 import 'package:flutter/services.dart';
@@ -65,7 +65,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => BagisciKimligi(),
+                builder: (context) => BagisListesi(),
               ),
             );
           },
@@ -106,7 +106,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => BagisciKimligi(),
+                            builder: (context) => BagisListesi(),
                           ),
                         );
                       },
@@ -125,7 +125,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => BilgiAlmaEkrani(),
+                            builder: (context) => BagisFormu(),
                           ),
                         );
                       },
@@ -213,6 +213,16 @@ class _BagisciShoppingState extends State<BagisciShopping> {
               ),
             ),
           ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              'Bağışlamak isteyip de Bağış İhtiyaç Listesinde bulamadığınız ürünleri "Bağış Formu" sayfasındaki formu doldururken "Bağışlar" başlığı altına ve aralarına virgül koyarak yazınız.\n\nÖNEMLİ!',
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF0E194D),
+              ),
+            ),
+          ),
           if (cartItemsB.isNotEmpty)
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 80, vertical: 8),
@@ -222,7 +232,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => BilgiAlmaEkrani()),);
+                      MaterialPageRoute(builder: (context) => BagisFormu()),);
                   },
                   icon: Icon(Icons.send_outlined),
                   label: Text(

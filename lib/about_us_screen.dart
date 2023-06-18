@@ -1,13 +1,34 @@
+import 'package:askida_afet/bagis_listesi.dart';
+import 'package:askida_afet/firebase_services.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
+import 'package:askida_afet/live_support_page.dart';
+import 'package:askida_afet/login_screen.dart';
 import 'package:flutter/material.dart';
+
+
 
 class AboutUsScreen extends StatefulWidget {
   @override
   _AboutUsScreenState createState() => _AboutUsScreenState();
 }
 
-class _AboutUsScreenState extends State<AboutUsScreen> {
+class _AboutUsScreenState extends State<AboutUsScreen> with FirebaseService {
   TextEditingController _emailController = TextEditingController();
+  String? description;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAboutUsDescription();
+  }
+
+  Future<void> fetchAboutUsDescription() async {
+    final desc = await FirebaseService.getAboutUsDesc('about_us_text');
+    setState(() {
+      description = desc;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +45,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '''Askıda Afet uygulaması, afet durumlarında ortaya çıkan ihtiyaçları hızlı ve etkin bir şekilde çözmeyi hedeflemektedir. İhtiyaç ambarı ve talep sistemi sayesinde afetzedelerin ihtiyaçlarını tespit eder ve organize eder.
-                
-Yardım kaynaklarının etkin bir şekilde kullanılması sağlanırken iletişim ve koordinasyon da kolaylaştırılmaktadır. Uygulama, yardımların herkes arasında adil bir şekilde dağıtılmasını sağlayan adaletli ve eşit dağıtım ilkesine dayanmaktadır.
-
-Bu şekilde toplumun birlikte hareket etmesini ve afetlerle mücadelede birbirine destek olmasını sağlayarak güçlü bir toplumsal dayanışma ağı oluşturmayı amaçlıyoruz.''',
+                description ?? '',
                 style: TextStyle(fontSize: 16.8, color: Colors.black),
               ),
               SizedBox(height: 15),
@@ -69,8 +86,9 @@ Bu şekilde toplumun birlikte hareket etmesini ve afetlerle mücadelede birbirin
                         SizedBox(height: 10),
                         Center(
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               // Geri dönüş işlemleri
+                              await FirebaseService.addVolunteer(_emailController.text);
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -80,11 +98,17 @@ Bu şekilde toplumun birlikte hareket etmesini ve afetlerle mücadelede birbirin
                                     actions: [
                                       ElevatedButton(
                                         onPressed: () {
-                                          Navigator.pop(context);
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => IhtiyacListesi()),
-                                          );
+                                          if(page==0){
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => IhtiyacListesi()),
+                                            );
+                                          } else if (page==1) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => BagisListesi()),
+                                            );
+                                          }
                                         },
                                         child: Text('Tamam'),
                                         style: ElevatedButton.styleFrom(
@@ -115,6 +139,24 @@ Bu şekilde toplumun birlikte hareket etmesini ve afetlerle mücadelede birbirin
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 65),
+        child: FloatingActionButton(
+          onPressed: () {
+            // Chatbot ikonuna tıklandığında yapılacak işlemler
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LiveSupportPage()),);
+          },
+          backgroundColor: Color(0xFFCF0000),
+          child: const Icon(
+            Icons.support_agent_outlined,
+            color: Colors.white,
+            size: 45,
           ),
         ),
       ),

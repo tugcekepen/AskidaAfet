@@ -1,3 +1,4 @@
+import 'package:askida_afet/live_support_page.dart';
 import 'package:flutter/material.dart';
 
 class ContactScreen extends StatelessWidget {
@@ -96,6 +97,24 @@ class ContactScreen extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 65),
+        child: FloatingActionButton(
+          onPressed: () {
+            // Chatbot ikonuna tıklandığında yapılacak işlemler
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LiveSupportPage()),);
+          },
+          backgroundColor: Color(0xFFCF0000),
+          child: const Icon(
+            Icons.support_agent_outlined,
+            color: Colors.white,
+            size: 45,
           ),
         ),
       ),

@@ -1,8 +1,7 @@
 import 'package:askida_afet/firebase_services.dart';
 import 'package:flutter/material.dart';
-import 'package:askida_afet/shopping_cart_screen.dart';
+import 'package:askida_afet/shopping_cart_ihtiyac.dart';
 import 'ihtiyac_listesi.dart';
-
 
 bool kodOlusturuldu = false;
 TextEditingController _taleplerController = TextEditingController();
@@ -73,7 +72,6 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
       );
     });
   }
-
 
   @override
   Widget build(BuildContext context) {

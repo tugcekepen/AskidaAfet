@@ -11,12 +11,12 @@ String generateRandomCode() {
 
 String requestCode = ''; // Talep Kodu
 
-class ShoppingCartScreen extends StatefulWidget {
+class IhtiyacShopping extends StatefulWidget {
   @override
   _ShoppingCartScreenState createState() => _ShoppingCartScreenState();
 }
 
-class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
+class _ShoppingCartScreenState extends State<IhtiyacShopping> {
   IhtiyacListesi iList = new IhtiyacListesi();
 
 
@@ -174,7 +174,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       },
                       child: Text('Talep Formuna Git'),
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFC85353),
+                        backgroundColor: Color(0xFFC85353),
                         padding:
                         EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                         shape: RoundedRectangleBorder(
@@ -259,7 +259,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-              'Talep Kodu oluşturduktan sonra kodu kopyalayıp "Talep" sayfasındaki formda "Talep Kodu" başlığı altına yapıştırınız.\n\nİhtiyaç Listesinde bulamadığınız ürünleri "Talep" sayfasındaki formu doldururken "Talepler" başlığı altına ve aralarına virgül koyarak yazınız.\n\nÖNEMLİ!',
+              'Talep Kodu oluşturduktan sonra kodu kopyalayıp "Talep Formu" sayfasındaki formda "Talep Kodu" başlığı altına yapıştırınız.\n\nİhtiyaç Listesinde bulamadığınız ürünleri "Talep" sayfasındaki formu doldururken "Talepler" başlığı altına ve aralarına virgül koyarak yazınız.\n\nÖNEMLİ!',
               style: TextStyle(
                 fontSize: 16,
                 color: Color(0xFF0E194D),

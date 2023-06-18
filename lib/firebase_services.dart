@@ -14,32 +14,49 @@ mixin FirebaseService {
       rethrow;
     }
   }
+
+  static Future<List<String>> getIhtiyacItems() async {
+    final DocumentSnapshot itemListDoc =
+    await FirebaseFirestore.instance.collection('itemList').doc('itemListI').get();
+    final Map<String, dynamic>? itemListData = itemListDoc.data() as Map<String, dynamic>?;
+    if (itemListData != null) {
+      return itemListData.keys.toList();
+    } else {
+      return [];
+    }
+  }
+
+  static Future<List<String>> getBagisItems() async {
+    final DocumentSnapshot itemListDoc = await FirebaseFirestore.instance
+        .collection('itemList')
+        .doc('itemListB')
+        .get();
+    final Map<String, dynamic>? itemListData = itemListDoc.data() as Map<String, dynamic>?;
+    if (itemListData != null && itemListData['items'] is List) {
+      final List<dynamic> itemList = itemListData['items'] as List<dynamic>;
+      return itemList.cast<String>();
+    } else {
+      return [];
+    }
+  }
+
+  static Future<String> getAboutUsDesc(String docName) async {
+    final DocumentSnapshot descriptionDoc = await FirebaseFirestore.instance
+        .collection('fixed_texts')
+        .doc(docName)
+        .get();
+    final Map<String, dynamic>? data = descriptionDoc.data() as Map<String, dynamic>?;
+    final String? descrip = data?['description'] as String?;
+    if(descrip != null && descrip.isNotEmpty){
+      return descrip;
+    } else {
+      return "";
+    }
+  }
+
+  static Future<void> addVolunteer(String email) async {
+    await FirebaseFirestore.instance.collection('volunteers').add({
+      'mail': email,
+    });
+  }
 }
-
-
-
-
-
-/*
-
-List<String> itemList = [
-  'Battaniye',
-  'Bebek Maması',
-  'Büyük-Küçük Tüp',
-  'Cep Isıtıcısı',
-  'Çadır',
-  'Çocuk-Yetişkin Bezi',
-  'Çocuk-Yetişkin İç Giyim',
-  'Çocuk-Yetişkin Mont',
-  'Elektrikli Isıtıcı',
-  'Hijyen Kolisi',
-  'Jeneratör',
-  'Kadın-Erkek Ayakkabı',
-  'Kadın-Erkek İç Giyim ve Çorap',
-  'Odun, Kömür Sobası-Odun',
-  'Powerbank',
-  'Su-Ekmek-Hazır Gıda',
-  'Uyku Tulumu-Yastık',
-  'Yatak ve Nevresim Takımı',
-];
-*/

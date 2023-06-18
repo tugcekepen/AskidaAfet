@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
-import 'bagisci_page.dart';
+import 'bagis_listesi.dart';
 
 int page = 0;
+// page=0 -> İhtiyaç Sahibi
+// page=1 -> Bağışçı
 
 class LoginScreen extends StatelessWidget {
 
@@ -62,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => BagisciKimligi(),
+                            builder: (context) => BagisListesi(),
                           ),
                         );
                       },

@@ -1,19 +1,20 @@
-import 'package:askida_afet/shopping_cart_ihtiyac.dart';
-import 'package:askida_afet/talep_formu.dart';
-import 'package:flutter/material.dart';
 import 'package:askida_afet/drawer_menu.dart';
-import 'package:askida_afet/search_delegate.dart';
-import 'package:askida_afet/live_support_page.dart';
 import 'package:askida_afet/firebase_services.dart';
+import 'package:askida_afet/ihtiyac_listesi.dart';
+import 'package:askida_afet/live_support_page.dart';
+import 'package:askida_afet/search_delegate.dart';
+import 'package:askida_afet/shopping_cart_bagisci.dart';
+import 'package:flutter/material.dart';
+import 'bagis_formu.dart';
 
-List<String> itemListI = [];
+List<String> itemListB = [];
 
-class IhtiyacListesi extends StatefulWidget {
+class BagisListesi extends StatefulWidget {
   @override
-  _IhtiyacListesiState createState() => _IhtiyacListesiState();
+  _BagisciKimligiState createState() => _BagisciKimligiState();
 }
 
-class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
+class _BagisciKimligiState extends State<BagisListesi> with FirebaseService{
   GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
   String searchText = '';
 
@@ -24,11 +25,11 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
     getItems();
   }
 
-  //firestore'dan çekilen veriler, arayüzlerde kullanabilsin diye kod içerisinde tanımlanmış listelere atanıyor
+  //firestore'dan çekilen veriler, arayüzlerde kullanabilsin diye kod içerisinde tanımlanmış listeye atanıyor
   Future<void> getItems() async {
-    List<String> items = await FirebaseService.getIhtiyacItems();
+    List<String> items = await FirebaseService.getBagisItems();
     setState(() {
-      itemListI = items;
+      itemListB = items;
     });
   }
 
@@ -59,44 +60,44 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
         ),
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.shopping_cart_outlined, // Sağdaki ilk ikon
-              color: Color(0xFF3B3B3B),
-              size: 30,
-            ),
-            onPressed: () {
-              // İkon tıklama işlemleri
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => IhtiyacShopping()),
-              );
-            },
+              icon: Icon(
+                Icons.shopping_cart_outlined, // Sağdaki ilk ikon
+                color: Color(0xFF3B3B3B),
+                size: 30,
+              ),
+              onPressed: () {
+                // İkon tıklama işlemleri
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BagisciShopping()),
+                );
+              },
           ),
           IconButton(
-            icon: Icon(
-              Icons.search, // Sağdaki ikinci ikon
-              color: Color(0xFF3B3B3B),
-              size: 30,
-            ),
-            onPressed: () {
-              // İkon tıklama işlemleri
-              showSearch(context: context, delegate: Search_Delegate(IhtiyacListesi()));
-            },
+              icon: Icon(
+                Icons.search, // Sağdaki ikinci ikon
+                color: Color(0xFF3B3B3B),
+                size: 30,
+              ),
+              onPressed: () {
+                // İkon tıklama işlemleri
+                showSearch(context: context, delegate: Search_Delegate(IhtiyacListesi()));
+              },
           ),
         ],
       ),
       body: FutureBuilder<List<String>>(
-        future: FirebaseService.getIhtiyacItems(),
+        future: FirebaseService.getBagisItems(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final List<String> itemListI = snapshot.data!;
+            final List<String> itemListB = snapshot.data!;
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Text(
-                    'İhtiyaç Listesi',
+                    'Bağış İhtiyaç Listesi',
                     style: TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
@@ -112,9 +113,9 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
                     color: Color(0xFFF4F4F4),
                     padding: EdgeInsets.all(16),
                     child: ListView.builder(
-                      itemCount: itemListI.length,
+                      itemCount: itemListB.length,
                       itemBuilder: (context, index) {
-                        final item = itemListI[index];
+                        final item = itemListB[index];
                         return Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -135,17 +136,16 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
                               ),
                               IconButton(
                                 onPressed: () {
-                                  // İkon tıklama işlemleri
-                                  if (cartItems.containsKey(item)) {
-                                    cartItems[item] = cartItems[item]! + 1;
-                                  } else {
-                                    cartItems[item] = 1;
-                                  }
                                   final snackBar = SnackBar(
-                                    content: Text('Sepetinize ürün eklendi'),
+                                    content: Text('Göndermek istediğiniz ürün eklendi'),
                                   );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  // İkon tıklama işlemleri
+                                  if (cartItemsB.containsKey(item)) {
+                                    cartItemsB[item] = cartItemsB[item]! + 1;
+                                  } else {
+                                    cartItemsB[item] = 1;
+                                  }
                                 },
                                 icon: Icon(
                                   Icons.add_circle,
@@ -163,13 +163,9 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
               ],
             );
           } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Veriler alınırken bir hata oluştu.'),
-            );
+            return Text('Veriler alınamadı.');
           } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return CircularProgressIndicator();
           }
         },
       ),
@@ -181,7 +177,6 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => LiveSupportPage()),);
-            // Chatbot ikonuna tıklandığında yapılacak işlemler
           },
           backgroundColor: Color(0xFFCF0000),
           child: const Icon(
@@ -200,6 +195,7 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
               Icons.home,
               size: 30,
               color: Colors.black,
+
             ),
             label: 'Ana Sayfa',
           ),
@@ -209,7 +205,7 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
               size: 30,
               color: Colors.black,
             ),
-            label: 'Talep Formu',
+            label: 'Bağış Formu',
           ),
         ],
         onTap: (index) {
@@ -217,21 +213,20 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
             case 0:
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => IhtiyacListesi())
+                  MaterialPageRoute(builder: (context) => BagisListesi())
               );
               break;
             case 1:
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TalepFormu())
+                  MaterialPageRoute(builder: (context) => BagisFormu())
               );
               break;
           }
         },
+
       ),
       drawer: DrawerMenu(),
     );
   }
 }
-
-

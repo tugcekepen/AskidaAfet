@@ -1,4 +1,4 @@
-import 'package:askida_afet/bagisci_page.dart';
+import 'package:askida_afet/bagis_listesi.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/firebase_services.dart';
 import 'package:askida_afet/shopping_cart_bagisci.dart';
@@ -10,12 +10,12 @@ TextEditingController _adresController = TextEditingController();
 TextEditingController _tcKimlikNoController = TextEditingController();
 TextEditingController _bagislarController = TextEditingController();
 
-class BilgiAlmaEkrani extends StatefulWidget {
+class BagisFormu extends StatefulWidget {
   @override
   _BilgiAlmaEkraniState createState() => _BilgiAlmaEkraniState();
 }
 
-class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> with FirebaseService {
+class _BilgiAlmaEkraniState extends State<BagisFormu> with FirebaseService {
   final _formKey = GlobalKey<FormState>();
 
   void sendFormToFirebase() {
@@ -125,6 +125,9 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> with FirebaseService 
                     ),
                     child: Column(
                       children: [
+                        Text(
+                          'Bağış İhtiyaç Listesinde bulamadığınız ürünleri "Bağışlar" başlığı altına ve aralarına virgül koyarak yazınız.',
+                        ),
                         TextFormField(
                           onTap: () {
                             FocusScope.of(context).unfocus(); // TextField focusundan çık
@@ -247,7 +250,7 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> with FirebaseService 
                           controller: _bagislarController,
                           decoration: InputDecoration(
                             labelText: 'Bağışlarınız',
-                            hintText: 'Bağış listesinde bulunmayan ama bağışlamak istediğiniz ürünleriniz var ise burada aralarına virgül koyarak yazabilirsiniz.',
+                            hintText: 'Aralarına virgül koyarak yazın.',
                             labelStyle: TextStyle(color: Color.fromARGB(255, 116, 113, 113) ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color:Color(0xFFCF0000)), // Odaklandığında kullanılacak kenarlık rengi
@@ -275,7 +278,7 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> with FirebaseService 
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => BagisciKimligi(),
+                                                builder: (context) => BagisListesi(),
                                               ),
                                             );
                                           },
@@ -368,13 +371,13 @@ class _BilgiAlmaEkraniState extends State<BilgiAlmaEkrani> with FirebaseService 
             case 0:
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BagisciKimligi())
+                  MaterialPageRoute(builder: (context) => BagisListesi())
               );
               break;
             case 1:
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BilgiAlmaEkrani())
+                  MaterialPageRoute(builder: (context) => BagisFormu())
               );
               break;
           }

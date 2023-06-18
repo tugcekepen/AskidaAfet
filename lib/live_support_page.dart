@@ -1,4 +1,7 @@
+import 'package:askida_afet/bagis_formu.dart';
+import 'package:askida_afet/bagis_listesi.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
+import 'package:askida_afet/login_screen.dart';
 import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
 
@@ -108,24 +111,42 @@ class _LiveSupportPageState extends State<LiveSupportPage> {
               Icons.help_outline_outlined,
               size: 30,
             ),
-            label: 'Talep Formu',
+            label: page==0 ? 'Talep Formu' : 'Bağış Formu',
           ),
         ],
         onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => IhtiyacListesi()),
-              );
-              break;
-            case 1:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TalepFormu()),
-              );
-              break;
+          if (page==0) {
+            switch (index) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => IhtiyacListesi()),
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TalepFormu()),
+                );
+                break;
+            }
+          } else if (page==1) {
+            switch (index) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BagisListesi()),
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BagisFormu()),
+                );
+                break;
+            }
           }
+
         },
       ),
     );

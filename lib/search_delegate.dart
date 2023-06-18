@@ -1,8 +1,9 @@
 import 'package:askida_afet/shopping_cart_bagisci.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
-import 'package:askida_afet/shopping_cart_screen.dart';
+import 'package:askida_afet/shopping_cart_ihtiyac.dart';
 import 'package:askida_afet/login_screen.dart';
+import 'package:askida_afet/bagis_listesi.dart';
 
 class Search_Delegate extends SearchDelegate<String> {
   IhtiyacListesi ihtiyacListesi; // IhtiyacListesi sınıfına referans
@@ -33,45 +34,98 @@ class Search_Delegate extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     // Arama sonuçlarını burada gösterin (isteğe bağlı)
-    final List<String> searchResults = itemList
-        .where((item) => item.toLowerCase().contains(query.toLowerCase()))
-        .toList();
 
-    return ListView.builder(
+    //arama sonuçları, uygulamadaki profile göre düzenleniyor
+    // page=0 -> İhtiyaç Sahibi
+    // page=1 -> Bağışçı
+    if (page == 0) {
+      final List<String> searchResults = itemListI
+          .where((item) => item.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+
+      return ListView.builder(
         itemCount: searchResults.length,
         itemBuilder: (context, index) {
           final result = searchResults[index];
           return ListTile(
-              title: Text(result),
-              onTap: () {
-                // Sonuç seçildiğinde yapılacak işlemler
-                if (page == 0) {
-                  if (cartItems.containsKey(result)) {
-                    cartItems[result] = cartItems[result]! + 1;
-                  } else {
-                    cartItems[result] = 1;
-                  }
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ShoppingCartScreen(),
-                    ),
-                  );
-                } else if (page == 1) {
-                  if (cartItemsB.containsKey(result)) {
-                    cartItemsB[result] = cartItemsB[result]! + 1;
-                  } else {
-                    cartItemsB[result] = 1;
-                  }
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BagisciShopping(),
-                    ),
-                  );
+            title: Text(result),
+            onTap: () {
+              // Sonuç seçildiğinde yapılacak işlemler
+              if (page == 0) {
+                if (cartItems.containsKey(result)) {
+                  cartItems[result] = cartItems[result]! + 1;
+                } else {
+                  cartItems[result] = 1;
                 }
-              });
-        });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => IhtiyacShopping(),
+                  ),
+                );
+              } else if (page == 1) {
+                if (cartItemsB.containsKey(result)) {
+                  cartItemsB[result] = cartItemsB[result]! + 1;
+                } else {
+                  cartItemsB[result] = 1;
+                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BagisciShopping(),
+                  ),
+                );
+              }
+            },
+          );
+        },
+      );
+    } else if (page == 1) {
+      final List<String> searchResults = itemListB
+          .where((item) => item.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+
+      return ListView.builder(
+        itemCount: searchResults.length,
+        itemBuilder: (context, index) {
+          final result = searchResults[index];
+          return ListTile(
+            title: Text(result),
+            onTap: () {
+              // Sonuç seçildiğinde yapılacak işlemler
+              if (page == 0) {
+                if (cartItems.containsKey(result)) {
+                  cartItems[result] = cartItems[result]! + 1;
+                } else {
+                  cartItems[result] = 1;
+                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => IhtiyacShopping(),
+                  ),
+                );
+              } else if (page == 1) {
+                if (cartItemsB.containsKey(result)) {
+                  cartItemsB[result] = cartItemsB[result]! + 1;
+                } else {
+                  cartItemsB[result] = 1;
+                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BagisciShopping(),
+                  ),
+                );
+              }
+            },
+          );
+        },
+      );
+    } else {
+      // Eğer hiçbir şarta uymuyorsa boş bir Container döndürerek hata durumunu engelleyebiliriz.
+      return Container();
+    }
   }
 
   @override
