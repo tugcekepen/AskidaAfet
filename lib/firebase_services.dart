@@ -59,4 +59,23 @@ mixin FirebaseService {
       'mail': email,
     });
   }
+
+  void sendToFirestore(String id, String code, Map<String, int> items, String collectionName) {
+    DocumentReference docRef = firestoreInstance.collection(collectionName).doc();
+
+    // Belgeye eklenecek anahtar ve değerleri oluşturma
+    Map<String, dynamic> documentData = {
+      id: code,
+    };
+
+    // Item'ları belgeye ekleyin
+    items.forEach((item, count) {
+      documentData[item] = count;
+    });
+
+    // Belgeyi Firestore koleksiyonuna ekleyin
+    docRef.set(documentData)
+        .then((value) => print('Belge Firestore\'a başarıyla eklendi!'))
+        .catchError((error) => print('Belge eklenirken bir hata oluştu: $error'));
+  }
 }

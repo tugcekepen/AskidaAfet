@@ -42,7 +42,10 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
       _adresController.text = "";
       _mailController.text= "";
       _telefonController.text = "";
-      final snackBar = SnackBar(content: Text('Form başarıyla gönderildi'));
+      final snackBar = SnackBar(
+          duration: const Duration(milliseconds: 800),
+          content: Text('Form başarıyla gönderildi'),
+      );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       Navigator.push(
         context,
@@ -331,6 +334,11 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                           if (_formKey.currentState!.validate()) {
                             // Form geçerliyse gönderilecek işlemler burada yapılır
                             sendFormToFirebase();
+                            if ((requestCode == null || requestCode.isEmpty)) {
+
+                            }else{
+                              sendToFirestore('talep_kodu', requestCode, cartItems, 'shop_cart_ihtiyac');
+                            }
                           } else {
                             // Form geçerli değilse hata mesajı gösterilir
                             showDialog(

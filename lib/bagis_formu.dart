@@ -42,7 +42,10 @@ class _BilgiAlmaEkraniState extends State<BagisFormu> with FirebaseService {
       _adresController.text = "";
       _mailController.text= "";
       _telefonController.text = "";
-      final snackBar = SnackBar(content: Text('Form başarıyla gönderildi'));
+      final snackBar = SnackBar(
+        duration: const Duration(milliseconds: 800),
+        content: Text('Form başarıyla gönderildi'),
+      );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     })
         .catchError((error) {
@@ -266,6 +269,11 @@ class _BilgiAlmaEkraniState extends State<BagisFormu> with FirebaseService {
                               if (_formKey.currentState!.validate()) {
                                 // Form geçerliyse gönderilecek işlemler burada yapılır
                                 sendFormToFirebase();
+                                if ((cartItemsB == null || cartItemsB.isEmpty)) {
+
+                                }else{
+                                  sendToFirestore('tc_no', _tcKimlikNoController.text, cartItemsB, 'shop_cart_bagis');
+                                }
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {

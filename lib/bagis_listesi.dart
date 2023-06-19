@@ -137,7 +137,20 @@ class _BagisciKimligiState extends State<BagisListesi> with FirebaseService{
                               IconButton(
                                 onPressed: () {
                                   final snackBar = SnackBar(
+                                    duration: const Duration(milliseconds: 800),
                                     content: Text('Göndermek istediğiniz ürün eklendi'),
+                                    action: SnackBarAction(
+                                      label: 'Geri Al',
+                                      onPressed: () {
+                                        if (cartItemsB.containsKey(item)) {
+                                          if (cartItemsB[item]! > 1) {
+                                            cartItemsB[item] = cartItemsB[item]! - 1;
+                                          } else {
+                                            cartItemsB.remove(item);
+                                          }
+                                        }
+                                      },
+                                    ),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                   // İkon tıklama işlemleri
