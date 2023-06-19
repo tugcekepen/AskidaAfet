@@ -187,6 +187,7 @@ class _BagisciKimligiState extends State<BagisListesi> with FirebaseService{
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
         items: [

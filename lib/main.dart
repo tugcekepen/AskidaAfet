@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:askida_afet/logo_screen.dart';
 import 'package:askida_afet/login_screen.dart';
 import 'live_support_page.dart';
@@ -15,15 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(), // Başlangıç ekranı olarak SplashScreen'i kullanıyoruz
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/loginScreen': (context) => LoginScreen(),
-        '/liveSupport': (context) => LiveSupportPage(),
-
-      },
-    );
-
+          home: SplashScreen(), // Başlangıç ekranı olarak SplashScreen'i kullanıyoruz
+          debugShowCheckedModeBanner: false,
+          routes: {
+            '/loginScreen': (context) => LoginScreen(),
+            '/liveSupport': (context) => LiveSupportPage(),
+          },
+        );
   }
 }
 

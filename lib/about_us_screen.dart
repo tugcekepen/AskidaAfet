@@ -88,7 +88,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> with FirebaseService {
                           child: ElevatedButton(
                             onPressed: () async {
                               // Geri dönüş işlemleri
-                              await FirebaseService.addVolunteer(_emailController.text);
+                              await FirebaseService.addMailInTheDrawer('volunteers', _emailController.text);
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {

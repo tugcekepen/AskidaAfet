@@ -333,8 +333,8 @@ class _BilgiAlmaEkraniState extends State<BagisFormu> with FirebaseService {
         padding: EdgeInsets.only(bottom: 65), // boşluk değeri
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/liveSupport');
             // Chatbot ikonuna tıklandığında yapılacak işlemler
+            Navigator.pushNamed(context, '/liveSupport');
           },
           backgroundColor: Color(0xFFCF0000),
           child: const Icon(
@@ -345,6 +345,7 @@ class _BilgiAlmaEkraniState extends State<BagisFormu> with FirebaseService {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
         items: [

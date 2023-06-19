@@ -1,11 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.askidafet.askida_afet">
     <uses-sdk
-        android:minSdkVersion="19" />
-   <application
+        android:minSdkVersion="20" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <application
         android:label="askida_afet"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDhDo2FHfOiy-tNrY-tLRJQuW5CQ6jmTWU"
+        />
         <activity
             android:name=".MainActivity"
             android:exported="true"

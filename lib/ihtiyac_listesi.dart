@@ -142,7 +142,20 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
                                     cartItems[item] = 1;
                                   }
                                   final snackBar = SnackBar(
+                                    duration: const Duration(milliseconds: 800),
                                     content: Text('Sepetinize ürün eklendi'),
+                                    action: SnackBarAction(
+                                      label: 'Geri Al',
+                                      onPressed: () {
+                                        if (cartItems.containsKey(item)) {
+                                          if (cartItems[item]! > 1) {
+                                            cartItems[item] = cartItems[item]! - 1;
+                                          } else {
+                                            cartItems.remove(item);
+                                          }
+                                        }
+                                      },
+                                    ),
                                   );
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);

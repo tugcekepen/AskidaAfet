@@ -140,6 +140,9 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                       child: TextFormField(
                         decoration: InputDecoration(
                           hintText: 'Kopyalanan kodu BURAYA YAPIŞTIRINIZ',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                          ),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color:Color(0xFFCF0000))
                           ),
@@ -167,6 +170,9 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         controller: _taleplerController,
                         decoration: InputDecoration(
                           hintText: 'Aralarına virgül koyarak yazınız',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                          ),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color:Color(0xFFCF0000))
                           ),
@@ -205,6 +211,9 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                          ),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color:Color(0xFFCF0000))
                           ),
@@ -235,6 +244,9 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                          ),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color:Color(0xFFCF0000))
                           ),
@@ -265,6 +277,9 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                          ),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color:Color(0xFFCF0000))
                           ),
@@ -295,6 +310,9 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         },
                         decoration: InputDecoration(
                           hintText: '*Zorunlu Alan',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                          ),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color:Color(0xFFCF0000))
                           ),
@@ -337,6 +355,7 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         child: Text('Gönder',
                           style: TextStyle(
                             fontSize: 17,
+                            color: Colors.white,
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -372,6 +391,7 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
         items: [

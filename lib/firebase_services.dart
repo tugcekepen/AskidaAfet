@@ -54,8 +54,8 @@ mixin FirebaseService {
     }
   }
 
-  static Future<void> addVolunteer(String email) async {
-    await FirebaseFirestore.instance.collection('volunteers').add({
+  static Future<void> addMailInTheDrawer(String collectionName, String email) async {
+    await FirebaseFirestore.instance.collection(collectionName).add({
       'mail': email,
     });
   }
