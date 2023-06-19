@@ -85,7 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           leading: Icon(Icons.location_on,),
           title: Text('Konum'),
         ),
-        SizedBox(height: MediaQuery.of(context).size.height/80),
+        SizedBox(height: MediaQuery.of(context).size.height/150),
         if(page==0)
           ...[
           Row(
@@ -154,7 +154,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             myLocationEnabled: true,
           ),
         ),
-        SizedBox(height: MediaQuery.of(context).size.height/50),
+        SizedBox(height: MediaQuery.of(context).size.height/150),
         Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(

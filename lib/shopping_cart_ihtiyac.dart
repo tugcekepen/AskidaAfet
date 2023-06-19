@@ -59,12 +59,17 @@ class _ShoppingCartScreenState extends State<IhtiyacShopping> {
 
   void removeItem(String item) {
     setState(() {
-      cartItems.remove(item);
+      if (cartItems.containsKey(item)) {
+        int itemCount = cartItems[item]!;
+        cartItems.remove(item);
+        sepetUrunSayisi -= itemCount;
+      }
     });
   }
 
   void increaseItemCount(String item) {
     setState(() {
+      sepetUrunSayisi++;
       if (cartItems.containsKey(item)) {
         cartItems[item] = cartItems[item]! + 1;
       } else {
@@ -75,6 +80,7 @@ class _ShoppingCartScreenState extends State<IhtiyacShopping> {
 
   void decreaseItemCount(String item) {
     setState(() {
+      sepetUrunSayisi--;
       if (cartItems.containsKey(item)) {
         if (cartItems[item]! > 1) {
           cartItems[item] = cartItems[item]! - 1;
@@ -261,7 +267,7 @@ class _ShoppingCartScreenState extends State<IhtiyacShopping> {
             child: Text(
               'Talep Kodu oluşturduktan sonra kodu kopyalayıp "Talep Formu" sayfasındaki formda "Talep Kodu" başlığı altına yapıştırınız.\n\nİhtiyaç Listesinde bulamadığınız ürünleri "Talep" sayfasındaki formu doldururken "Talepler" başlığı altına ve aralarına virgül koyarak yazınız.\n\nÖNEMLİ!',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 13,
                 color: Color(0xFF0E194D),
               ),
             ),

@@ -16,12 +16,17 @@ class _BagisciShoppingState extends State<BagisciShopping> {
 
   void removeItem(String item) {
     setState(() {
-      cartItemsB.remove(item);
+      if (cartItemsB.containsKey(item)) {
+        int itemCount = cartItemsB[item]!;
+        cartItemsB.remove(item);
+        sepetUrunSayisi2 -= itemCount;
+      }
     });
   }
 
   void increaseItemCount(String item) {
     setState(() {
+      sepetUrunSayisi2++;
       if (cartItemsB.containsKey(item)) {
         cartItemsB[item] = cartItemsB[item]! + 1;
       } else {
@@ -32,6 +37,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
 
   void decreaseItemCount(String item) {
     setState(() {
+      sepetUrunSayisi2--;
       if (cartItemsB.containsKey(item)) {
         if (cartItemsB[item]! > 1) {
           cartItemsB[item] = cartItemsB[item]! - 1;
@@ -218,7 +224,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
             child: Text(
               'Bağışlamak isteyip de Bağış İhtiyaç Listesinde bulamadığınız ürünleri "Bağış Formu" sayfasındaki formu doldururken "Bağışlar" başlığı altına ve aralarına virgül koyarak yazınız.\n\nÖNEMLİ!',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 13,
                 color: Color(0xFF0E194D),
               ),
             ),

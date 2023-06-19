@@ -7,6 +7,7 @@ import 'package:askida_afet/live_support_page.dart';
 import 'package:askida_afet/firebase_services.dart';
 
 List<String> itemListI = [];
+int sepetUrunSayisi = 0;
 
 class IhtiyacListesi extends StatefulWidget {
   @override
@@ -58,19 +59,49 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
           ),
         ),
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.shopping_cart_outlined, // Sağdaki ilk ikon
-              color: Color(0xFF3B3B3B),
-              size: 30,
-            ),
-            onPressed: () {
-              // İkon tıklama işlemleri
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => IhtiyacShopping()),
-              );
-            },
+          Stack(
+            children: [
+              IconButton(
+                padding: EdgeInsets.fromLTRB(5, 8, 0, 0),
+                icon: Icon(
+                  Icons.shopping_cart_outlined, // Sağdaki ilk ikon
+                  color: Color(0xFF3B3B3B),
+                  size: 27,
+                ),
+                onPressed: () {
+                  // İkon tıklama işlemleri
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => IhtiyacShopping()),
+                  );
+                },
+              ),
+              sepetUrunSayisi != 0
+              ? Positioned(
+                right: 0,
+                top: 2,
+                child: Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 16,
+                    minHeight: 16,
+                  ),
+                  child: Text(
+                    '$sepetUrunSayisi',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+                  : SizedBox.shrink(),
+            ],
           ),
           IconButton(
             icon: Icon(
@@ -136,6 +167,9 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
                               IconButton(
                                 onPressed: () {
                                   // İkon tıklama işlemleri
+                                  setState(() {
+                                    sepetUrunSayisi++;
+                                  });
                                   if (cartItems.containsKey(item)) {
                                     cartItems[item] = cartItems[item]! + 1;
                                   } else {
@@ -147,6 +181,9 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
                                     action: SnackBarAction(
                                       label: 'Geri Al',
                                       onPressed: () {
+                                        setState(() {
+                                          sepetUrunSayisi--;
+                                        });
                                         if (cartItems.containsKey(item)) {
                                           if (cartItems[item]! > 1) {
                                             cartItems[item] = cartItems[item]! - 1;

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'bagis_formu.dart';
 
 List<String> itemListB = [];
+int sepetUrunSayisi2 = 0;
 
 class BagisListesi extends StatefulWidget {
   @override
@@ -59,19 +60,49 @@ class _BagisciKimligiState extends State<BagisListesi> with FirebaseService{
           ),
         ),
         actions: [
-          IconButton(
-              icon: Icon(
-                Icons.shopping_cart_outlined, // Sağdaki ilk ikon
-                color: Color(0xFF3B3B3B),
-                size: 30,
+          Stack(
+            children: [
+              IconButton(
+                padding: EdgeInsets.fromLTRB(5, 8, 0, 0),
+                icon: Icon(
+                  Icons.shopping_cart_outlined, // Sağdaki ilk ikon
+                  color: Color(0xFF3B3B3B),
+                  size: 27,
+                ),
+                onPressed: () {
+                  // İkon tıklama işlemleri
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BagisciShopping()),
+                  );
+                },
               ),
-              onPressed: () {
-                // İkon tıklama işlemleri
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => BagisciShopping()),
-                );
-              },
+              sepetUrunSayisi2 != 0
+                  ? Positioned(
+                right: 0,
+                top: 2,
+                child: Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 16,
+                    minHeight: 16,
+                  ),
+                  child: Text(
+                    '$sepetUrunSayisi2',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+                  : SizedBox.shrink(),
+            ],
           ),
           IconButton(
               icon: Icon(
@@ -136,12 +167,18 @@ class _BagisciKimligiState extends State<BagisListesi> with FirebaseService{
                               ),
                               IconButton(
                                 onPressed: () {
+                                  setState(() {
+                                    sepetUrunSayisi2++;
+                                  });
                                   final snackBar = SnackBar(
                                     duration: const Duration(milliseconds: 800),
                                     content: Text('Göndermek istediğiniz ürün eklendi'),
                                     action: SnackBarAction(
                                       label: 'Geri Al',
                                       onPressed: () {
+                                        setState(() {
+                                          sepetUrunSayisi2--;
+                                        });
                                         if (cartItemsB.containsKey(item)) {
                                           if (cartItemsB[item]! > 1) {
                                             cartItemsB[item] = cartItemsB[item]! - 1;
