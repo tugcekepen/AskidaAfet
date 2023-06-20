@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:app_settings/app_settings.dart';
 import 'package:askida_afet/firebase_services.dart';
 import 'package:askida_afet/location_services.dart';
 import 'package:askida_afet/login_screen.dart';
 import 'package:askida_afet/main.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
@@ -14,11 +16,11 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _isDarkModeEnabled = false;
+  bool _isNotification = true;
   TextEditingController _emailController = TextEditingController();
   Location location = Location();
   LocationData? currentLocation; // Konum verisini tutmak için nullable değişken
   Completer<GoogleMapController> haritaControl = Completer();
-  ThemeData _themeData = ThemeData.light();
 
   @override
   void initState() {
@@ -52,14 +54,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  //??????????????
-  void _toggleDarkMode(bool value) {
-    setState(() {
-      _isDarkModeEnabled = !value;
-      _themeData = value ? ThemeData.dark() : ThemeData.light();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           trailing: Switch(
             value: _isDarkModeEnabled,
             onChanged: (value) {
-              _toggleDarkMode(value);
+              _isDarkModeEnabled = value;
             },
           ),
         ),
@@ -95,8 +89,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
           leading: Icon(Icons.notifications),
           title: Text('Bildirimler'),
           trailing: Switch(
-            value: _isDarkModeEnabled,
-            onChanged: (v) {
+            value: _isNotification,
+            onChanged: (value) {
+              setState(() {
+                _isNotification = value;
+              });
+              if (_isNotification) {
+
+              }
 
             },
           ),

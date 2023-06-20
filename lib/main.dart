@@ -7,6 +7,7 @@ import 'package:askida_afet/logo_screen.dart';
 import 'package:askida_afet/login_screen.dart';
 import 'package:askida_afet/live_support_page.dart';
 import 'package:askida_afet/talep_formu.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -132,5 +133,13 @@ Widget myBottomNaviBar(int currentPage, BuildContext context) {
       }
     },
   );
+}
+
+void commandLaunch(command) async {
+  if (await canLaunch(command)) {
+    await launch(command);
+  } else {
+    print('could not launch $command');
+  }
 }
 

@@ -45,7 +45,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> with FirebaseService {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+        padding: EdgeInsets.fromLTRB(16, 16, 16, 2),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> with FirebaseService {
                 description ?? '',
                 style: TextStyle(fontSize: 16.8, color: Colors.black),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: MediaQuery.of(context).size.height/150),
               Center(
                 child: Card(
                   color: Color(0xFFEDEDED),

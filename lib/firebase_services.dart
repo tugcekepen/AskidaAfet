@@ -54,6 +54,21 @@ mixin FirebaseService {
     }
   }
 
+  static Future<Map<String, dynamic>> getAllStores() async {
+    final CollectionReference _storesCollection = FirebaseFirestore.instance
+        .collection('stores');
+    try {
+      DocumentSnapshot snapshot = await _storesCollection.doc('all-stores').get();
+      if (snapshot.exists) {
+        return snapshot.data() as Map<String, dynamic>;
+      }
+      return {};
+    } catch (e) {
+      print('Hata: $e');
+      return {};
+    }
+  }
+
   static Future<void> addMailInTheDrawer(String collectionName, String email) async {
     await FirebaseFirestore.instance.collection(collectionName).add({
       'mail': email,

@@ -1,11 +1,9 @@
 import 'package:askida_afet/login_screen.dart';
 import 'package:askida_afet/main.dart';
 import 'package:askida_afet/shopping_cart_ihtiyac.dart';
-import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/drawer_menu.dart';
 import 'package:askida_afet/search_delegate.dart';
-import 'package:askida_afet/live_support_page.dart';
 import 'package:askida_afet/firebase_services.dart';
 
 List<String> itemListI = [];
