@@ -1,6 +1,7 @@
 import 'package:askida_afet/bagis_formu.dart';
 import 'package:askida_afet/bagis_listesi.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
+import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:askida_afet/logo_screen.dart';
@@ -52,23 +53,28 @@ class _SplashScreenState extends State<SplashScreen> {
 }
 
 Widget myFab(BuildContext context) {
-  return Padding(
-    padding: EdgeInsets.only(bottom: 65),
-    child: FloatingActionButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LiveSupportPage()),
-        );
-        // Chatbot ikonuna tıklandığında yapılacak işlemler
-      },
-      backgroundColor: Color(0xFFCF0000),
-      child: const Icon(
-        Icons.support_agent_outlined,
-        color: Colors.white,
-        size: 45,
+  return Stack(
+    children: [Padding(
+      padding: EdgeInsets.only(bottom: 35),
+      child: DraggableFab(
+        securityBottom: 45,
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LiveSupportPage()),
+            );
+            // Chatbot ikonuna tıklandığında yapılacak işlemler
+          },
+          backgroundColor: Color(0xFFCF0000),
+          child: const Icon(
+            Icons.support_agent_outlined,
+            color: Colors.white,
+            size: 45,
+          ),
+        ),
       ),
-    ),
+    ),]
   );
 }
 

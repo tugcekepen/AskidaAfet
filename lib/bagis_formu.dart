@@ -92,7 +92,10 @@ class _BilgiAlmaEkraniState extends State<BagisFormu> with FirebaseService {
             color: Color(0xFF3B3B3B), // Geri butonunun rengi
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BagisListesi()),
+            );
           },
         ),
       ),
