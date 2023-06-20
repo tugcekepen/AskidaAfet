@@ -16,7 +16,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _isDarkModeEnabled = false;
-  bool _isNotification = true;
+  bool _isNotificationEnabled = true;
   TextEditingController _emailController = TextEditingController();
   Location location = Location();
   LocationData? currentLocation; // Konum verisini tutmak için nullable değişken
@@ -54,7 +54,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -74,37 +74,44 @@ class _SettingsScreenState extends State<SettingsScreen> {
         SizedBox(height: MediaQuery.of(context).size.height/80),
         // Bu switch çalışmıyor !!!!!!!!!!!!!!!!!!!
         ListTile(
-          leading: Icon(Icons.dark_mode),
+          leading: Icon(Icons.dark_mode, color: Color(0xFF3B3B3B),),
           title: Text('Dark Mod'),
           trailing: Switch(
+            activeTrackColor: Color(0xFFC85353),
+            activeColor: Color(0xFF962929),
+            inactiveTrackColor: Color(0xFF3B3B3B),
+            inactiveThumbColor: Colors.black26,
             value: _isDarkModeEnabled,
             onChanged: (value) {
-              _isDarkModeEnabled = value;
+              setState(() {
+                _isDarkModeEnabled = value;
+              });
+
             },
           ),
         ),
         SizedBox(height: MediaQuery.of(context).size.height/150),
         // Bu switch çalışmıyor !!!!!!!!!!!!!!!!!!!
         ListTile(
-          leading: Icon(Icons.notifications),
+          leading: Icon(Icons.notifications, color: Color(0xFF3B3B3B),),
           title: Text('Bildirimler'),
-          trailing: Switch(
-            value: _isNotification,
-            onChanged: (value) {
-              setState(() {
-                _isNotification = value;
-              });
-              if (_isNotification) {
-
-              }
-
+          trailing: IconButton(
+            icon: Icon(Icons.chevron_right_outlined, color: Color(0xFF3B3B3B),),
+            onPressed: () {
+              AppSettings.openNotificationSettings();
             },
-          ),
+          )
         ),
         SizedBox(height: MediaQuery.of(context).size.height/150),
         ListTile(
-          leading: Icon(Icons.location_on,),
+          leading: Icon(Icons.location_on, color: Color(0xFF3B3B3B),),
           title: Text('Konum'),
+            trailing: IconButton(
+              icon: Icon(Icons.chevron_right_outlined, color: Color(0xFF3B3B3B),),
+              onPressed: () {
+                AppSettings.openLocationSettings();
+              },
+            )
         ),
         SizedBox(height: MediaQuery.of(context).size.height/150),
         if(page==0)

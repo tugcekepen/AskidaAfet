@@ -40,6 +40,8 @@ dependencies:
   url_launcher: ^6.1.11
   provider: ^6.0.5
   app_settings: ^4.2.0
+  package_info_plus: ^4.0.2
+  permission_handler: ^10.3.0
 
 dev_dependencies:
   flutter_test:
