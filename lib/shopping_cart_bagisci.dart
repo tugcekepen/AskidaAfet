@@ -1,9 +1,9 @@
 import 'package:askida_afet/bagis_listesi.dart';
 import 'package:askida_afet/bagis_formu.dart';
+import 'package:askida_afet/main.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
 import 'package:flutter/services.dart';
-import 'live_support_page.dart';
 
 class BagisciShopping extends StatefulWidget {
   @override
@@ -153,7 +153,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
           Expanded(
             child: Container(
               color: Color(0xFFF4F4F4),
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: ListView.builder(
                 itemCount: cartItemsB.length,
                 itemBuilder: (context, index) {
@@ -209,7 +209,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
                           icon: Icon(
                             Icons.delete_outline_outlined,
                             color: Color(0xFFCF0000),
-                            size: 35,
+                            size: 30,
                           ),
                         ),
                       ],
@@ -258,23 +258,7 @@ class _BagisciShoppingState extends State<BagisciShopping> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 65),
-        child: FloatingActionButton(
-          onPressed: () {
-            // Chatbot ikonuna tıklandığında yapılacak işlemler
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LiveSupportPage()),);
-          },
-          backgroundColor: Color(0xFFCF0000),
-          child: const Icon(
-            Icons.support_agent_outlined,
-            color: Colors.white,
-            size: 45,
-          ),
-        ),
-      ),
+      floatingActionButton: myFab(context),
     );
   }
 }

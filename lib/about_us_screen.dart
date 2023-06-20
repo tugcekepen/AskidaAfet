@@ -1,11 +1,9 @@
 import 'package:askida_afet/bagis_listesi.dart';
 import 'package:askida_afet/firebase_services.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
-import 'package:askida_afet/live_support_page.dart';
 import 'package:askida_afet/login_screen.dart';
+import 'package:askida_afet/main.dart';
 import 'package:flutter/material.dart';
-
-
 
 class AboutUsScreen extends StatefulWidget {
   @override
@@ -29,17 +27,25 @@ class _AboutUsScreenState extends State<AboutUsScreen> with FirebaseService {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Hakkımızda'),
         backgroundColor: Color(0xFF962929),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Colors.white, // Geri butonunun rengi
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,23 +149,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> with FirebaseService {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 65),
-        child: FloatingActionButton(
-          onPressed: () {
-            // Chatbot ikonuna tıklandığında yapılacak işlemler
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LiveSupportPage()),);
-          },
-          backgroundColor: Color(0xFFCF0000),
-          child: const Icon(
-            Icons.support_agent_outlined,
-            color: Colors.white,
-            size: 45,
-          ),
-        ),
-      ),
+      floatingActionButton: myFab(context),
     );
   }
 }

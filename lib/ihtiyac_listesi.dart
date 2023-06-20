@@ -1,3 +1,5 @@
+import 'package:askida_afet/login_screen.dart';
+import 'package:askida_afet/main.dart';
 import 'package:askida_afet/shopping_cart_ihtiyac.dart';
 import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +143,7 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
                 Expanded(
                   child: Container(
                     color: Color(0xFFF4F4F4),
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
                     child: ListView.builder(
                       itemCount: itemListI.length,
                       itemBuilder: (context, index) {
@@ -159,7 +161,7 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
                                 child: Text(
                                   item,
                                   style: TextStyle(
-                                    color: Color(0xFFCF0000),
+                                    color: Color(0xFF3B3B3B),
                                     fontSize: 16,
                                   ),
                                 ),
@@ -180,6 +182,7 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
                                     content: Text('Sepetinize ürün eklendi'),
                                     action: SnackBarAction(
                                       label: 'Geri Al',
+                                      textColor: Color(0xFFCF0000),
                                       onPressed: () {
                                         setState(() {
                                           sepetUrunSayisi--;
@@ -224,61 +227,8 @@ class _IhtiyacListesiState extends State<IhtiyacListesi> with FirebaseService{
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 65),
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LiveSupportPage()),);
-            // Chatbot ikonuna tıklandığında yapılacak işlemler
-          },
-          backgroundColor: Color(0xFFCF0000),
-          child: const Icon(
-            Icons.support_agent_outlined,
-            color: Colors.white,
-            size: 45,
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 30,
-              color: Colors.black,
-            ),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.help_outline_outlined,
-              size: 30,
-              color: Colors.black,
-            ),
-            label: 'Talep Formu',
-          ),
-        ],
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => IhtiyacListesi())
-              );
-              break;
-            case 1:
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TalepFormu())
-              );
-              break;
-          }
-        },
-      ),
+      floatingActionButton: myFab(context),
+      bottomNavigationBar: myBottomNaviBar(page, context),
       drawer: DrawerMenu(),
     );
   }

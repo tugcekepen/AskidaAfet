@@ -1,3 +1,4 @@
+import 'package:askida_afet/main.dart';
 import 'package:askida_afet/talep_formu.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
@@ -196,7 +197,7 @@ class _ShoppingCartScreenState extends State<IhtiyacShopping> {
           Expanded(
             child: Container(
               color: Color(0xFFF4F4F4),
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: ListView.builder(
                 itemCount: cartItems.length,
                 itemBuilder: (context, index) {
@@ -252,7 +253,7 @@ class _ShoppingCartScreenState extends State<IhtiyacShopping> {
                           icon: Icon(
                             Icons.delete_outline_outlined,
                             color: Color(0xFFCF0000),
-                            size: 35,
+                            size: 30,
                           ),
                         ),
                       ],
@@ -300,21 +301,7 @@ class _ShoppingCartScreenState extends State<IhtiyacShopping> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 65),
-        child: FloatingActionButton(
-          onPressed: () {
-            // Chatbot ikonuna tıklandığında yapılacak işlemler
-            Navigator.pushNamed(context, '/liveSupport');
-          },
-          backgroundColor: Color(0xFFCF0000),
-          child: const Icon(
-            Icons.support_agent_outlined,
-            color: Colors.white,
-            size: 45,
-          ),
-        ),
-      ),
+      floatingActionButton: myFab(context),
     );
   }
 }

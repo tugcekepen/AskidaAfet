@@ -1,4 +1,6 @@
 import 'package:askida_afet/bagis_listesi.dart';
+import 'package:askida_afet/login_screen.dart';
+import 'package:askida_afet/main.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/firebase_services.dart';
 import 'package:askida_afet/shopping_cart_bagisci.dart';
@@ -337,61 +339,8 @@ class _BilgiAlmaEkraniState extends State<BagisFormu> with FirebaseService {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 65), // boşluk değeri
-        child: FloatingActionButton(
-          onPressed: () {
-            // Chatbot ikonuna tıklandığında yapılacak işlemler
-            Navigator.pushNamed(context, '/liveSupport');
-          },
-          backgroundColor: Color(0xFFCF0000),
-          child: const Icon(
-            Icons.support_agent_outlined,
-            color: Colors.white,
-            size: 45,
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 30,
-              color: Colors.black,
-            ),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.help_outline_outlined,
-              size: 30,
-              color: Colors.black,
-            ),
-            label: 'Bağış Formu',
-          ),
-        ],
-        currentIndex: 1,
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => BagisListesi())
-              );
-              break;
-            case 1:
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => BagisFormu())
-              );
-              break;
-          }
-        },
-      ),
+      floatingActionButton: myFab(context),
+      bottomNavigationBar: myBottomNaviBar(page, context),
     );
   }
 }

@@ -33,8 +33,6 @@ class Search_Delegate extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    // Arama sonuçlarını burada gösterin (isteğe bağlı)
-
     //arama sonuçları, uygulamadaki profile göre düzenleniyor
     // page=0 -> İhtiyaç Sahibi
     // page=1 -> Bağışçı
@@ -52,6 +50,7 @@ class Search_Delegate extends SearchDelegate<String> {
             onTap: () {
               // Sonuç seçildiğinde yapılacak işlemler
               if (page == 0) {
+                sepetUrunSayisi++;
                 if (cartItems.containsKey(result)) {
                   cartItems[result] = cartItems[result]! + 1;
                 } else {
@@ -64,6 +63,7 @@ class Search_Delegate extends SearchDelegate<String> {
                   ),
                 );
               } else if (page == 1) {
+                sepetUrunSayisi2++;
                 if (cartItemsB.containsKey(result)) {
                   cartItemsB[result] = cartItemsB[result]! + 1;
                 } else {
@@ -94,6 +94,7 @@ class Search_Delegate extends SearchDelegate<String> {
             onTap: () {
               // Sonuç seçildiğinde yapılacak işlemler
               if (page == 0) {
+                sepetUrunSayisi++;
                 if (cartItems.containsKey(result)) {
                   cartItems[result] = cartItems[result]! + 1;
                 } else {
@@ -106,6 +107,7 @@ class Search_Delegate extends SearchDelegate<String> {
                   ),
                 );
               } else if (page == 1) {
+                sepetUrunSayisi2++;
                 if (cartItemsB.containsKey(result)) {
                   cartItemsB[result] = cartItemsB[result]! + 1;
                 } else {
@@ -130,7 +132,7 @@ class Search_Delegate extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // Arama önerilerini burada gösterin (isteğe bağlı)
+    // Arama önerileri (isteğe bağlı)
     return Container();
   }
 }

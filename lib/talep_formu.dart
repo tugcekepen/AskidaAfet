@@ -1,4 +1,6 @@
 import 'package:askida_afet/firebase_services.dart';
+import 'package:askida_afet/login_screen.dart';
+import 'package:askida_afet/main.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/shopping_cart_ihtiyac.dart';
 import 'ihtiyac_listesi.dart';
@@ -383,61 +385,8 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 65), // boşluk değeri
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/liveSupport');
-            // Chatbot ikonuna tıklandığında yapılacak işlemler
-          },
-          backgroundColor: Color(0xFFCF0000),
-          child: const Icon(
-            Icons.support_agent_outlined,
-            color: Colors.white,
-            size: 45,
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 30,
-              color: Colors.black,
-            ),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.help_outline_outlined,
-              size: 30,
-              color: Colors.black,
-            ),
-            label: 'Talep Formu',
-          ),
-        ],
-        currentIndex: 1,
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => IhtiyacListesi())
-              );
-              break;
-            case 1:
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TalepFormu())
-              );
-              break;
-          }
-        },
-      ),
+      floatingActionButton: myFab(context),
+      bottomNavigationBar: myBottomNaviBar(page, context),
     );
   }
 }
