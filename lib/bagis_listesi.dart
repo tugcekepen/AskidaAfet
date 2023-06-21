@@ -4,7 +4,7 @@ import 'package:askida_afet/ihtiyac_listesi.dart';
 import 'package:askida_afet/login_screen.dart';
 import 'package:askida_afet/main.dart';
 import 'package:askida_afet/search_delegate.dart';
-import 'package:askida_afet/shopping_cart_bagisci.dart';
+import 'package:askida_afet/shopping_cart_ihtiyac.dart';
 import 'package:flutter/material.dart';
 
 List<String> itemListB = [];
@@ -73,7 +73,7 @@ class _BagisciKimligiState extends State<BagisListesi> with FirebaseService{
                   // İkon tıklama işlemleri
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BagisciShopping()),
+                    MaterialPageRoute(builder: (context) => IhtiyacShopping()),
                   );
                 },
               ),

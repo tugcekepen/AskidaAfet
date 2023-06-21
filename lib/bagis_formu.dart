@@ -3,7 +3,7 @@ import 'package:askida_afet/login_screen.dart';
 import 'package:askida_afet/main.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/firebase_services.dart';
-import 'package:askida_afet/shopping_cart_bagisci.dart';
+import 'package:askida_afet/shopping_cart_ihtiyac.dart';
 
 TextEditingController _adSoyadController = TextEditingController();
 TextEditingController _telefonController = TextEditingController();
@@ -274,6 +274,7 @@ class _BilgiAlmaEkraniState extends State<BagisFormu> with FirebaseService {
                               if (_formKey.currentState!.validate()) {
                                 // Form geçerliyse gönderilecek işlemler burada yapılır
                                 sendFormToFirebase();
+                                sepetUrunSayisi2 = 0;
                                 if ((cartItemsB == null || cartItemsB.isEmpty)) {
 
                                 }else{

@@ -177,7 +177,7 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                       child: TextFormField(
                         controller: _taleplerController,
                         decoration: InputDecoration(
-                          hintText: 'Aralarına virgül koyarak yazınız',
+                          hintText: 'Örn: sargı bezi(3 tane) , bere(2)',
                           hintStyle: TextStyle(
                             fontSize: 14,
                           ),
@@ -339,6 +339,7 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                           if (_formKey.currentState!.validate()) {
                             // Form geçerliyse gönderilecek işlemler burada yapılır
                             sendFormToFirebase();
+                            sepetUrunSayisi = 0;
                             if ((requestCode == null || requestCode.isEmpty)) {
 
                             }else{

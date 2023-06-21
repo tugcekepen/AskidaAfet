@@ -1,4 +1,3 @@
-import 'package:askida_afet/shopping_cart_bagisci.dart';
 import 'package:flutter/material.dart';
 import 'package:askida_afet/ihtiyac_listesi.dart';
 import 'package:askida_afet/shopping_cart_ihtiyac.dart';
@@ -56,12 +55,6 @@ class Search_Delegate extends SearchDelegate<String> {
                 } else {
                   cartItems[result] = 1;
                 }
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => IhtiyacShopping(),
-                  ),
-                );
               } else if (page == 1) {
                 sepetUrunSayisi2++;
                 if (cartItemsB.containsKey(result)) {
@@ -69,13 +62,13 @@ class Search_Delegate extends SearchDelegate<String> {
                 } else {
                   cartItemsB[result] = 1;
                 }
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BagisciShopping(),
-                  ),
-                );
               }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => IhtiyacShopping(),
+                ),
+              );
             },
           );
         },
@@ -100,12 +93,6 @@ class Search_Delegate extends SearchDelegate<String> {
                 } else {
                   cartItems[result] = 1;
                 }
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => IhtiyacShopping(),
-                  ),
-                );
               } else if (page == 1) {
                 sepetUrunSayisi2++;
                 if (cartItemsB.containsKey(result)) {
@@ -113,13 +100,13 @@ class Search_Delegate extends SearchDelegate<String> {
                 } else {
                   cartItemsB[result] = 1;
                 }
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BagisciShopping(),
-                  ),
-                );
               }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => IhtiyacShopping(),
+                ),
+              );
             },
           );
         },
