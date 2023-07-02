@@ -30,7 +30,7 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
       'talepler': talepler,
       'ad_soyad': _adSoyadController.text,
       'adres': _adresController.text,
-      'mail': _mailController.text,
+      'mail': _mailController.text.toLowerCase(),
       'telefon': _telefonController.text,
     };
 
@@ -133,14 +133,14 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                     Text(
                       'İhtiyaç Listesinde bulamadığınız ürünleri "Talepler" başlığı altına ve aralarına virgül koyarak yazınız.',
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: MediaQuery.of(context).size.height / 80),
                     Text(
                       'Talep Kodu (Sepette oluşturuldu ise)',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: MediaQuery.of(context).size.height / 100),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
@@ -169,7 +169,7 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: MediaQuery.of(context).size.height / 100),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
@@ -197,14 +197,14 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         },
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: MediaQuery.of(context).size.height / 40),
                     Text(
                       'Ad Soyad',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: MediaQuery.of(context).size.height / 100),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
@@ -230,19 +230,21 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         cursorColor: Color(0xFFCF0000),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: MediaQuery.of(context).size.height / 40),
                     Text(
                       'Açık Adres',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: MediaQuery.of(context).size.height / 100),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextFormField(
+                        minLines: 1,
+                        maxLines: 3,
                         controller: _adresController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -263,14 +265,14 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         cursorColor: Color(0xFFCF0000),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: MediaQuery.of(context).size.height / 40),
                     Text(
                       'Mail Adresi',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: MediaQuery.of(context).size.height / 100),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
@@ -278,8 +280,13 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                       child: TextFormField(
                         controller: _mailController,
                         validator: (value) {
+                          value = value!.toLowerCase();
                           if (value == null || value.isEmpty) {
                             return 'Mail Adresi alanını doldurunuz.';
+                          } else if (!value.contains('@')){
+                            return 'Geçerli bir mail adresi giriniz.';
+                          } else if (!(value.endsWith('.com') || value.endsWith('.tr') || value.endsWith('.com') || value.endsWith('.us') || value.endsWith('.net'))) {
+                            return 'Geçerli bir mail adresi giriniz.';
                           }
                           return null;
                         },
@@ -296,14 +303,14 @@ class _TalepFormuState extends State<TalepFormu> with FirebaseService {
                         cursorColor: Color(0xFFCF0000),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: MediaQuery.of(context).size.height / 40),
                     Text(
                       'Telefon',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: MediaQuery.of(context).size.height / 100),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
